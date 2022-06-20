@@ -1,5 +1,5 @@
 export class LogInResponse {
-    Id?: string;
+    Id?: any;
     Code?: string;
     Surname?: string;
     LastName?: string;
