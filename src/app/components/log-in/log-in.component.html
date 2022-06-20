@@ -1,0 +1,22 @@
+<div class="form-group">
+    <form class="form-control" *ngIf="!this.validUsername" #logInForm="ngForm" >
+        <label class="col-sm-2 control-label" for="username">Código de Usuario</label>
+        <input type="text" minlength="9" maxlength="9" size="20" class="form-group" placeholder="Ingrese su código UPC" id="username" name="username" id="ngModel" [(ngModel)]="credentials.Username" #username="ngModel" required/>
+        <div class="btn-primary btn-sm btn-default" (click)="getUsername()">
+            <button class="btn btn-primary" type="submit" [disabled]="!logInForm.form.valid">Siguiente</button>
+        </div>
+    </form>
+    <form class="form-group" *ngIf="this.validUsername && !this.loggedIn" #logInForm2="ngForm">
+        <label class="control-label" for="password">Contraseña</label>
+        <input type="password" class="form-control" minlength="8" maxlength="25" size="20" placeholder="Ingrese su contraseña" id="password" name="password" [(ngModel)]="credentials.Password" #password="ngModel" required>
+        <div class="btn-primary btn-sm btn-default">
+            <button class="btn btn-primary" type="submit" [disabled]="!logInForm2.form.valid" (click)="logIn()">Iniciar sesión</button>
+        </div>
+    </form>
+    <div *ngIf="loggedIn">
+        <h3>¡Inicio de sesión exitoso!</h3>
+        <button class="btn btn-success" routerLink="student-appointments" (click)="newLogIn()">
+            Ir a Home
+        </button>
+    </div>
+</div>
