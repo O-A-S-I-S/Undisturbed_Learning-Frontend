@@ -1,0 +1,24 @@
+img{
+    width: 50px;
+    height: 50px;
+    align-items: left;
+}
+.navbar-expand{
+    background-color: whitesmoke;
+    height: fit-content;
+}
+/* a{
+    color: #075985;
+    font-size: 30px;
+    margin-right: 148px;
+} */
+.nav-link{
+    align-content: center;
+    color: #075985;
+    font-size: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+img{
+    height: 50px;
+}

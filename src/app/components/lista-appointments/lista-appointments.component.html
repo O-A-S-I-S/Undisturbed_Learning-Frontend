@@ -1,0 +1,68 @@
+<p>lista-appointments works!</p>
+<!-- <div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button type="button" class="btn btn-outline-primary">search</button>
+  </div> -->
+  <form [formGroup]="form" (ngSubmit)="retrieveAllAppointmentsByStudent()">
+    <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text">
+         
+
+            <button
+              (click)="retrieveAllAppointmentsByStudent()"
+            ><i class="fa-solid fa-magnifying-glass"></i></button>
+          
+        </span>
+        <input
+          formControlName="studentCode"
+          type="text"
+          class="form-control"
+          placeholder="Code"
+        />
+      </div>
+  
+  </form>
+  
+<table class="content-table">
+    <thead>
+          <tr>
+            <th>Id</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Cause Description</th>
+              <th>Comment</th>
+              <th>Rating</th>
+              <th>Psychopedagogist</th>
+              <th>Student</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+          </tr>
+      </thead>
+      <tbody>
+        
+        <tr *ngFor="let appo of appointments">
+
+            <td>{{appo.id}}</td>
+            <td>{{appo.start}}</td>
+            <td>{{appo.end}}</td>
+            <td>{{appo.causeDescription}}</td>
+            <td>{{appo.comment}}</td>
+            <td>{{appo.rating}}</td>
+            <td>{{appo.psychopedagogistId}}</td>
+            <td>{{appo.studentId}}</td>
+            <td>
+                <i
+                  (click)="deleteAppointment(appo.id)"
+                  class="far fa-edit text-info"
+                ></i>
+              </td>
+            <td>
+                <i
+                    (click)="deleteAppointment(appo.id)"
+                    class="far fa-trash-alt text-danger"
+                ></i>    
+            </td>
+        </tr>
+
+      </tbody>
+  </table>

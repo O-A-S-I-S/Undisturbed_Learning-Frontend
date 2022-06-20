@@ -1,0 +1,62 @@
+<div id="formulario">
+<h1>FORMULARIO DE CITA</h1>
+
+<form [formGroup]="form" (ngSubmit)="createAppointment()">
+    <div class="input-group input-group-lg mb-3" >
+
+        <input
+          formControlName="Fecha"
+          type="date"
+          class="form-control"
+          placeholder="Fecha"
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="Hora"
+        type="number"
+        class="form-control"
+        placeholder="Hora inicio"
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="Causa"
+        type="text"
+        class="form-control"
+        placeholder="Causa"
+        />
+    </div>
+    <!-- <div class="input-group input-group-lg mb-3">
+        <input
+        formControlName="Recordatorio"
+        type="number"
+        class="form-control"
+        placeholder="Recordatorio"
+        />
+    </div> -->
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="psychopedagogistCode"
+        type="text"
+        class="form-control"
+        placeholder="Psychopedagogist"
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="studentCode"
+        type="text"
+        class="form-control"
+        placeholder="Student"
+        />
+    </div>
+    <button class="cancelar" >
+        <a routerLink="/appointments">Cancelar</a>
+    </button>
+    <button class="crear" (click)="createAppointment()">
+        Crear
+    </button>
+  
+  </form>
+</div>
