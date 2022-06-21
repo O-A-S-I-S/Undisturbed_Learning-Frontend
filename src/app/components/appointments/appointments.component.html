@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Font Awesome Icons</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="titulo">LISTADO DE GENEROS</h5>
+            <table class="table">
+              
+              <tbody>
+                <tr *ngFor="let ap of appointments">
+                  <td>{{ ap.psychopedagogistName }} <br> {{ ap.start }} </td>
+                  <td>
+                    <button>
+                        <a routerLink="reports/{{ap.id}}">
+                            <i class="fa fa-file"></i>
+                        </a>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      (click) = "myAlert(ap)"
+                    ><i
+                    class="fa fa-comment"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+
+
