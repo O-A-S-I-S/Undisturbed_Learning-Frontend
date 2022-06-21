@@ -1,5 +1,6 @@
 export class Appointment {
     id?:number;
+    day?:string;
     start?:string;
     end?:string;
     causeDescription?:string;

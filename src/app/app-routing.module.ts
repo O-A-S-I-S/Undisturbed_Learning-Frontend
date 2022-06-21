@@ -1,4 +1,4 @@
-import { WorkshopsComponent } from './component/workshops/workshops.component';
+import { ListaWorkshopsComponent } from './components/lista-workshops/lista-workshops.component';
 import { CreateappointmentComponent } from './components/createappointment/createappointment.component';
 import { StudentsComponent } from './components/students/students.component';
 import { NgModule } from '@angular/core';
@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'appointments',component:ListaAppointmentsComponent},
   {path:'student',component:StudentsComponent},
   {path:'add',component:CreateappointmentComponent},
-  {path:'talleres',component:WorkshopsComponent},
+  {path:'workshops',component:ListaWorkshopsComponent}
 
 ];
 

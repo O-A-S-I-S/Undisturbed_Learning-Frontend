@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,8 +10,8 @@ import { ListaAppointmentsComponent } from './components/lista-appointments/list
 import { ObjToArrayPipe } from './models/objToArray.pipe';
 import{GetFromArray}from './models/getFromArray.pipe';
 import { CreateappointmentComponent } from './components/createappointment/createappointment.component';
+import { ListaWorkshopsComponent } from './components/lista-workshops/lista-workshops.component';
 
-import { WorkshopsComponent } from './component/workshops/workshops.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,7 @@ import { WorkshopsComponent } from './component/workshops/workshops.component';
     ObjToArrayPipe,
     GetFromArray,
     CreateappointmentComponent,
-    WorkshopsComponent
+    ListaWorkshopsComponent
   ],
   imports: [
     BrowserModule,

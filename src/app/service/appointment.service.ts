@@ -24,4 +24,8 @@ export class AppointmentService {
   addAppointment(appointment:Createappointment):Observable<Createappointment>{
     return this.http.post<Appointment>(this.baseUrl,appointment);
   }
+  updateAppointmentRating(id?:number,rating?:number):Observable<Appointment>{
+    return this.http.put<Appointment>(`${this.baseUrl+'/'+id+'?rating='+rating}`,rating);
+  }
+
 }

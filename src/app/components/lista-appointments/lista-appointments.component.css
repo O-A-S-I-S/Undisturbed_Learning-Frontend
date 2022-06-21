@@ -12,7 +12,9 @@ button{
 }
 button{
     background-color: #e76e6e;
+    
 }
+
 .input-group{
     width: 10%;
     margin-left: 5px;
@@ -23,16 +25,18 @@ button{
     border-color: #e76e6e;
 }
 .content-table{
-    
+    /* visibility: hidden; */
     border-collapse: collapse;
-    margin: 25px 0 0 5px;
-    
+    /* margin: 25px 0 0 5px; */
+    /* margin-top: -17em; */
+    margin-left: 5px;
     font-size: 0.9em;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    min-width: 60%;
-    width: fit-content;
+    width: 50%;
+    /* width: fit-content; */
+    float: left;
 }
 .content-table thead tr{
     background-color: #e76e6e;
@@ -44,6 +48,7 @@ button{
 .content-table th,
 .content-table td{
     padding: 12px 15px;
+    text-align: center;
 
 }
 .content-table tbody tr{
@@ -55,4 +60,105 @@ button{
 }
 .content-table tbody tr:last-of-type{
     border-bottom: 2px solid #e76e6e;
+}
+
+
+
+
+
+/* Segundo formulario */
+#formulario{
+    width:20%;
+    margin: auto;
+    padding: 20px;
+    margin-top: 0px;
+    border-color: black;
+    border-radius: 30px;
+    background-color: #e76e6e;
+    margin-right: 12em;
+    /* box-sizing: content-box; */
+    position: relative;
+    
+    float: right;
+}
+h1{
+    text-align: center;
+    padding-bottom: 0.5em;
+    color: white;
+}
+
+.cancel{
+    background-color: white;
+    margin-left: 5em;
+    border-radius: 30px;
+    width: 5em;
+    padding: 0.5em;
+}
+.rate{
+    background-color: white;
+    /* margin-right: 15em; */
+    
+    margin-left: 0.5em;
+    border-radius: 30px;
+    width: 5em;
+    padding: 0.5em;
+
+}
+.cancel a{
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+.rate a{
+    color: black;
+    text-align: center;
+}
+.form-control2{
+    /* width: 15em; */
+    margin-left: 5em;
+    width: fit-content;
+    border-radius: 30px;
+}
+.container{
+    width: 100%;
+}
+.tablas{
+    width: 100%;
+}
+.input-group p{
+    font-size: 15px;
+    width: fit-content;
+    color: white;
+    float: left;
+}
+.input-group p input{
+   background-color: antiquewhite;
+   
+}
+#citaP{
+    width: 50%;
+    float: left;
+
+}
+#citaInput{
+    width: 50%;
+    float: right;
+}
+#primerGrupo{
+    width: 100%;
+}
+#Rp{
+    width: 50%;
+    float: left;
+
+}
+#Rinp{
+    width: 50%;
+    float: right;
+}
+#segundoGrupo{
+    width: 100%;
+}
+#rate{
+    width: 12em;
 }

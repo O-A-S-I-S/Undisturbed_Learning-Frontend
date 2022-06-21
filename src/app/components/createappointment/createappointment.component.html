@@ -1,12 +1,13 @@
 <div id="formulario">
 <h1>FORMULARIO DE CITA</h1>
 
-<form [formGroup]="form" (ngSubmit)="createAppointment()">
+<form [formGroup]="form" >
     <div class="input-group input-group-lg mb-3" >
 
         <input
           formControlName="Fecha"
           type="date"
+          dateformat="y M d"
           class="form-control"
           placeholder="Fecha"
         />

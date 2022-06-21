@@ -1,4 +1,4 @@
-<p>lista-appointments works!</p>
+
 <!-- <div class="input-group">
     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
     <button type="button" class="btn btn-outline-primary">search</button>
@@ -8,7 +8,7 @@
         <span class="input-group-text">
          
 
-            <button
+            <button 
               (click)="retrieveAllAppointmentsByStudent()"
             ><i class="fa-solid fa-magnifying-glass"></i></button>
           
@@ -23,10 +23,15 @@
   
   </form>
   
+<div class="tablas">
+  
+
+    
 <table class="content-table">
     <thead>
           <tr>
-            <th>Id</th>
+              <th>Id</th>
+              <th>Day</th>
               <th>Start</th>
               <th>End</th>
               <th>Cause Description</th>
@@ -34,7 +39,7 @@
               <th>Rating</th>
               <th>Psychopedagogist</th>
               <th>Student</th>
-              <th>Editar</th>
+              <th>Calificar</th>
               <th>Eliminar</th>
           </tr>
       </thead>
@@ -43,6 +48,7 @@
         <tr *ngFor="let appo of appointments">
 
             <td>{{appo.id}}</td>
+            <td>{{appo.day}}</td>
             <td>{{appo.start}}</td>
             <td>{{appo.end}}</td>
             <td>{{appo.causeDescription}}</td>
@@ -51,10 +57,10 @@
             <td>{{appo.psychopedagogistId}}</td>
             <td>{{appo.studentId}}</td>
             <td>
-                <i
-                  (click)="deleteAppointment(appo.id)"
-                  class="far fa-edit text-info"
-                ></i>
+             
+                <i (click)="onClick(appo.id)"
+                class="fas fa-star"></i>
+              
               </td>
             <td>
                 <i
@@ -66,3 +72,72 @@
 
       </tbody>
   </table>
+  <div *ngIf="showMe" id="formulario">
+
+    <h1>CALIFIQUE SU CITA</h1>
+    
+    <form [formGroup]="form2" >
+      <div>
+
+        <div class="input-group input-group-lg mb-3" >
+          <div id="primerGrupo">
+            <div id="citaP">
+
+              <p >Cita Id
+              </p>
+            </div>
+            <div id="citaInput">
+
+              <input
+              formControlName="citaId"
+              type="number"
+              class="form-control2"
+              placeholder="Ingresa el id de la cita"
+              
+              />
+          </div>
+              
+        </div>
+          
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+          <div id="segundoGrupo">
+            <div id="Rp">
+              
+              <p>Rating
+                
+              </p>
+            </div>
+            <div id="Rinp">
+
+              <input
+              formControlName="Rating"
+              type="number"
+              min="0"
+              max="10"
+              class="form-control2"
+              placeholder="Ingresa el rating"
+              id="rate"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+        
+        <button (click)="onClick()" class="cancel" >
+          <a routerLink="/appointments">Cancelar</a>
+        </button>
+        <button class="rate" (click)="addRating()" >
+          Calificar
+        </button>
+      
+    </form>
+  </div>
+    
+</div>
+
+  
+
+
+
+

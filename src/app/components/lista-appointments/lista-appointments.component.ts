@@ -13,8 +13,10 @@ import { timeout } from 'rxjs';
   styleUrls: ['./lista-appointments.component.css']
 })
 export class ListaAppointmentsComponent implements OnInit {
+  showMe:boolean=false;
   appointments?:Appointment[];
   form:FormGroup;
+  form2:FormGroup;
   constructor(
     private appointmentService:AppointmentService,
     private fb: FormBuilder,
@@ -22,7 +24,10 @@ export class ListaAppointmentsComponent implements OnInit {
       this.form=this.fb.group({
         studentCode:['',Validators.required]
       })
-     
+     this.form2=this.fb.group({
+      Rating:['',Validators.required],
+      citaId:['',Validators.required]
+     })
       
       
      }
@@ -55,7 +60,7 @@ export class ListaAppointmentsComponent implements OnInit {
         },
         error: (e)=>{console.log(e),
           this.toastr.error('No tiene citas asociadas','',{
-            timeOut:1000,
+            timeOut:2000,
           
           });
           this.form?.reset();
@@ -65,7 +70,7 @@ export class ListaAppointmentsComponent implements OnInit {
       })
     }
     deleteAppointment(id?: number) {
-      const c=this.form.get('studentCode')?.value;
+      
       this.appointmentService.deleteAppointmentById(id).subscribe({
         next: (data) => {
           this.toastr.error(
@@ -83,6 +88,30 @@ export class ListaAppointmentsComponent implements OnInit {
      
       
     }
+    addRating(){
+      const id=this.form2.get('citaId')?.value;
+      const rate=this.form2.get('Rating')?.value;
+      this.appointmentService.updateAppointmentRating(id,rate).subscribe({
+        next:(data)=>{
+          this.toastr.success('Calificacion actualizada');
+          this.retrieveAllAppointmentsByStudent();
+          this.onClick();
+        },
+        error: (e) => {
+          alert("error");
+          console.log(e);
+        },
+      })
+    }
+    onClick(id?:number){
+      if(this.showMe==true)this.showMe=false;
+      else this.showMe=true;
+      this.form2.get('citaId')?.disable();
+      // alert(this.form2.get('citaId')?.value)
+      this.form2.get('citaId')?.setValue(id);
+     
+    }
+      
     
   }
 

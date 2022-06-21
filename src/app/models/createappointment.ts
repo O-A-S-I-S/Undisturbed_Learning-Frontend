@@ -1,6 +1,7 @@
 export class Createappointment {
-    startTime?:string;
-    endTime?:string;
+    day?:string;
+    start?:string;
+    end?:string;
     causeDescription?:string;
     // reminder?:number;
     psychopedagogist?:string;

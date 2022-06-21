@@ -1,0 +1,69 @@
+
+<!-- <div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button type="button" class="btn btn-outline-primary">search</button>
+  </div> -->
+  <form [formGroup]="form"(ngSubmit)="retrieveAllWorkshopsByPsychopedagogistId()">
+    <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text">
+         
+
+            <button
+                (click)="retrieveAllWorkshopsByPsychopedagogistId()"
+            ><i class="fa-solid fa-magnifying-glass"></i></button>
+          
+        </span>
+        <input
+          formControlName="psychopedagogistId"
+          type="text"
+          class="form-control"
+          placeholder="Code"
+        />
+      </div>
+  
+  </form>
+  
+<table class="content-table">
+    <thead>
+          <tr>
+              <th>Id</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Title</th>
+              <th>Brief</th>
+              <th>Text</th>
+              <th>Comment</th>
+              <th>Psychopedagogist</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+              
+          </tr>
+      </thead>
+      <tbody>
+        
+        <tr *ngFor="let w of workshops">
+
+            <td>{{w.id}}</td>
+            <td>{{w.start}}</td>
+            <td>{{w.end}}</td>
+            <td>{{w.title}}</td>
+            <td>{{w.brief}}</td>
+            <td>{{w.text}}</td>
+            <td>{{w.comment}}</td>
+            <td>{{w.psychopedagogistId}}</td>
+            <td>
+                <i
+                  
+                  class="far fa-edit text-info"
+                ></i>
+              </td>
+            <td>
+                <i
+                    (click)="deleteWorkshop(w.id)"
+                    class="far fa-trash-alt text-danger"
+                ></i>    
+            </td>
+        </tr>
+
+      </tbody>
+  </table>

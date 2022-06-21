@@ -39,13 +39,25 @@ export class CreateappointmentComponent implements OnInit {
     
     const fecha=this.form.get('Fecha')?.value;
     const hora=this.form.get('Hora')?.value;
-    const fechaformatoInicio=fecha+'T'+hora+':00:00';
-    const fechaformatoFin=fecha+'T'+hora+':45:00';
+    alert(hora);
+    var fechaformatoInicio;
+    var fechaformatoFin;
+    if(hora<10){
+       fechaformatoInicio=fecha+'T'+'0'+hora+':00:00';
+       fechaformatoFin=fecha+'T'+'0'+hora+':45:00';
+    }
+    else{
+       fechaformatoInicio=fecha+'T'+hora+':00:00';
+       fechaformatoFin=fecha+'T'+hora+':45:00';
+    }
+   
+
     
 
     const appointment:Createappointment={
-      startTime:fechaformatoInicio,
-      endTime:fechaformatoFin,
+      day:this.form.get('Fecha')?.value,
+      start:fechaformatoInicio,
+      end:fechaformatoFin,
       causeDescription:this.form.get('Causa')?.value,
       // reminder:this.form.get('Recordatorio')?.value,
       psychopedagogist:this.form.get('psychopedagogistCode')?.value,
