@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
 import { Observable } from 'rxjs';
 import { LogIn } from '../models/log-in.model';
-import { SignIn } from '../models/sign-in.model';
-import { LogInResponse } from '../models/log-in-response.model';
+import { SignIn } from '../students/models/sign-in.model';
 
 @Injectable({
   providedIn: 'root'
