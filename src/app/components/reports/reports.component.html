@@ -1,0 +1,7 @@
+<p>Report from Appointment</p>
+<ul *ngIf="report; else notFound">
+    {{report.resolution}} <br>
+    {{report.brief}} <br>
+    {{report.text}} <br>
+</ul>
+<ng-template #notFound>Reporte no encontrado</ng-template>
