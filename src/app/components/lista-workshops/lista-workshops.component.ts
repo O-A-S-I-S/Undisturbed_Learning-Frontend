@@ -3,6 +3,7 @@ import { Workshop } from './../../models/workshop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-lista-workshops',
@@ -13,6 +14,9 @@ export class ListaWorkshopsComponent implements OnInit {
 
   workshops?:Workshop[];
   form:FormGroup;
+  pageSize=5;
+  desde:number=0;
+  hasta:number=5;
   constructor(
     private workshopService:WorkshopService,
     private fb: FormBuilder,
@@ -26,6 +30,11 @@ export class ListaWorkshopsComponent implements OnInit {
      }
 
   ngOnInit(): void {
+  }
+  cambiarpagina(e:PageEvent){
+    console.log(e);
+    this.desde=e.pageIndex*e.pageSize;
+    this.hasta=this.desde+e.pageSize;
   }
   retrieveAllWorkshopsByPsychopedagogistId():void{
     

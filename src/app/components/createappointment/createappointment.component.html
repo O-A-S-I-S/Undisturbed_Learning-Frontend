@@ -10,6 +10,8 @@
           dateformat="y M d"
           class="form-control"
           placeholder="Fecha"
+          onfocus="this.min=new Date().toISOString().split('T')[0]"
+          
         />
     </div>
     <div class="input-group input-group-lg mb-3" >
@@ -18,6 +20,8 @@
         type="number"
         class="form-control"
         placeholder="Hora inicio"
+        min="8"
+        max="18"
         />
     </div>
     <div class="input-group input-group-lg mb-3" >

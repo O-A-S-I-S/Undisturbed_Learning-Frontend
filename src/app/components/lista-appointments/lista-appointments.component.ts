@@ -5,6 +5,7 @@ import { ObjToArrayPipe } from './../../models/objToArray.pipe';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { timeout } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -17,6 +18,9 @@ export class ListaAppointmentsComponent implements OnInit {
   appointments?:Appointment[];
   form:FormGroup;
   form2:FormGroup;
+  pageSize=5;
+  desde:number=0;
+  hasta:number=5;
   constructor(
     private appointmentService:AppointmentService,
     private fb: FormBuilder,
@@ -35,9 +39,13 @@ export class ListaAppointmentsComponent implements OnInit {
 
       
     ngOnInit(): void {
-      
+      this.retrieveAllAppointmentsByStudent();
     }
-
+    cambiarpagina(e:PageEvent){
+      console.log(e);
+      this.desde=e.pageIndex*e.pageSize;
+      this.hasta=this.desde+e.pageSize;
+    }
   retrieveAllAppointments():void{
     this.appointmentService.getAllAppointments().subscribe({
       next:(data)=>{
@@ -103,12 +111,19 @@ export class ListaAppointmentsComponent implements OnInit {
         },
       })
     }
-    onClick(id?:number){
+    onClick(id?:number,rating?:number){
       if(this.showMe==true)this.showMe=false;
       else this.showMe=true;
-      this.form2.get('citaId')?.disable();
-      // alert(this.form2.get('citaId')?.value)
       this.form2.get('citaId')?.setValue(id);
+      this.form2.get('citaId')?.disable();
+      if(rating!=0){
+        this.form2.get('Rating')?.setValue(rating);
+        this.form2.get('Rating')?.disable();
+      }
+      else{
+        this.form2.get('Rating')?.enable();
+      }
+      
      
     }
       

@@ -41,7 +41,7 @@
       </thead>
       <tbody>
         
-        <tr *ngFor="let w of workshops">
+        <tr *ngFor="let w of workshops| slice:desde:hasta">
 
             <td>{{w.id}}</td>
             <td>{{w.start}}</td>
@@ -67,3 +67,9 @@
 
       </tbody>
   </table>
+  <mat-paginator [length]="workshops?.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10]"
+  (page)="cambiarpagina($event)"
+  >
+</mat-paginator>

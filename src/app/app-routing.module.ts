@@ -1,3 +1,4 @@
+
 import { ListaWorkshopsComponent } from './components/lista-workshops/lista-workshops.component';
 import { CreateappointmentComponent } from './components/createappointment/createappointment.component';
 import { StudentsComponent } from './components/students/students.component';
@@ -9,7 +10,9 @@ const routes: Routes = [
   {path:'appointments',component:ListaAppointmentsComponent},
   {path:'student',component:StudentsComponent},
   {path:'add',component:CreateappointmentComponent},
-  {path:'workshops',component:ListaWorkshopsComponent}
+  {path:'workshops',component:ListaWorkshopsComponent},
+
+  
 
 ];
 

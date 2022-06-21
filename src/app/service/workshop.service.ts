@@ -1,3 +1,4 @@
+
 import { environment } from './../../environments/environment';
 import { Workshop } from './../models/workshop';
 import { Injectable } from '@angular/core';
@@ -16,4 +17,5 @@ export class WorkshopService {
   deleteWokshopById(id?:number):Observable<Workshop>{
     return this.http.delete(`${this.baseUrl+'/'+id}`);
   }
+
 }

@@ -39,7 +39,7 @@ export class CreateappointmentComponent implements OnInit {
     
     const fecha=this.form.get('Fecha')?.value;
     const hora=this.form.get('Hora')?.value;
-    alert(hora);
+    
     var fechaformatoInicio;
     var fechaformatoFin;
     if(hora<10){
@@ -68,10 +68,10 @@ export class CreateappointmentComponent implements OnInit {
     this.appointmentService.addAppointment(appointment).subscribe({
       next:(data)=>{
         this.form.reset();
-        
+        this.toastr.success('Cita creada exitosamente')
       },
       error:(e)=>{
-        this.toastr.error('Error');
+        this.toastr.error('Completa los datos correctamente');
       }
     })
     

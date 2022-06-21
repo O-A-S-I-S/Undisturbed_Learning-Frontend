@@ -11,6 +11,8 @@ import { ObjToArrayPipe } from './models/objToArray.pipe';
 import{GetFromArray}from './models/getFromArray.pipe';
 import { CreateappointmentComponent } from './components/createappointment/createappointment.component';
 import { ListaWorkshopsComponent } from './components/lista-workshops/lista-workshops.component';
+import{MatPaginatorModule}from '@angular/material/paginator';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ListaWorkshopsComponent } from './components/lista-workshops/lista-work
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NoopAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
