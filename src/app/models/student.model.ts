@@ -1,12 +1,12 @@
 export class Student {
-    Id?: string;
-    Code?: string;
-    Dni?: string;
-    Surname?: string;
-    LastName?: string;
-    BirthDate?: string;
-    Email?: string;
-    Cellphone?: string;
-    Telephone?: string;
-    Undergraduate?: boolean;
+    id?: string;
+    code?: string;
+    dni?: string;
+    surname?: string;
+    lastName?: string;
+    birthDate?: string;
+    email?: string;
+    cellphone?: string;
+    telephone?: string;
+    undergraduate?: boolean;
 }

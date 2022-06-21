@@ -47,18 +47,18 @@ export class SignInComponent implements OnInit {
 
   signIn(): void {
     const data = {
-      Username: this.form.get('username')?.value,
-      Password: this.form.get('password')?.value,
+      username: this.form.get('username')?.value,
+      password: this.form.get('password')?.value,
       ConfirmPassword: this.form.get('confirmPassword')?.value,
     };
 
-    if (data.Password != data.ConfirmPassword) {
+    if (data.password != data.ConfirmPassword) {
       this.toastr.error('Las contraseñas no coinciden', 'Registro fallido');
       return;
     }
 
     let validator = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-    if (!data.Password.match(validator)){
+    if (!data.password.match(validator)){
       this.toastr.error('La contraseña no es lo suficientemente segura', 'Registro fallido');
       return;      
     }

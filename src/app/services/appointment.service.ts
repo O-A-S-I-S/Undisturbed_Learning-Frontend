@@ -13,11 +13,11 @@ export class AppointmentService {
 
   constructor(private http: HttpClient) { }
 
-  getByStudentId(studentId: any): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/{studentId}`);
+  getByStudentId(studentId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.baseUrl}/student/${studentId}`);
   }
 
-  getByPsychopedagogistId(psychopedagogistId: any): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/{psychopedagogistId}`);
+  getByPsychopedagogistId(psychopedagogistId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.baseUrl}/psychopedagogist/${psychopedagogistId}`);
   }
 }

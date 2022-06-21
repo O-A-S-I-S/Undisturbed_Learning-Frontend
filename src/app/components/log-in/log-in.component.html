@@ -29,7 +29,7 @@
 </form>
 <div *ngIf="loggedIn">
     <h3>¡Inicio de sesión exitoso!</h3>
-    <button class="btn btn-success" routerLink="appointment-list" (click)="newLogIn()">
+    <button class="btn btn-success" routerLink="/appointment-list/{{student.id}}" (click)="newLogIn()">
         Ir a Home
     </button>
 </div>

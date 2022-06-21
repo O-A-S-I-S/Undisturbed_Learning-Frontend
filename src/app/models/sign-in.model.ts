@@ -1,5 +1,5 @@
 export class SignIn {
-    Username?: string;
-    Password?: string;
-    ConfirmPassword?: string;
+    username?: string;
+    password?: string;
+    confirmPassword?: string;
 }

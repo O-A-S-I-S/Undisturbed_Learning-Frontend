@@ -1,10 +1,10 @@
 export class Report {
-    Id?: any;
-    StudentId?: any;
-    PsychopedagogistId?: any;
-    Activity?: string;
-    CauseDescription?: string;
-    Resolution?: string;
-    Brief?: string;
-    Text?: string;
+    id?: any;
+    studentId?: any;
+    psychopedagogistId?: any;
+    activity?: string;
+    causeDescription?: string;
+    resolution?: string;
+    brief?: string;
+    text?: string;
 }

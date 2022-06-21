@@ -43,8 +43,8 @@ export class LogInComponent implements OnInit {
 
   logIn(): void {
     const data = {
-      Username: this.form.get('username')?.value,
-      Password: this.form.get('password')?.value,
+      username: this.form.get('username')?.value,
+      password: this.form.get('password')?.value,
     };
     this.studentService.logIn(data).subscribe({
       next: (data) => {

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-appointment-list',
@@ -10,25 +11,22 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./appointment-list.component.css']
 })
 export class AppointmentListComponent implements OnInit {
-  studentId?: string;
+  studentId: any;
   appointments?: Appointment[];
 
-  form?: FormGroup;
 
   constructor(private appointmentService: AppointmentService,
-    private fb: FormBuilder,
-    private toastr: ToastrService) { 
-      this.form = this.fb.group({
-        description:['',Validators.required],
-      });
-    }
+              private route: ActivatedRoute,
+              private toastr: ToastrService) { 
+              this.studentId = this.route.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
-    this.studentId = '1';
+    console.log(this.studentId);
     this.onDataTable(this.studentId);
   }
 
-  onDataTable(studentId: string): void {
+  onDataTable(studentId: number): void {
     this.appointmentService.getByStudentId(studentId).subscribe({
       next: (data) => {
         this.appointments = data;

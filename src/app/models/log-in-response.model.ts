@@ -1,8 +1,8 @@
 export class LogInResponse {
-    Id?: any;
-    Code?: string;
-    Surname?: string;
-    LastName?: string;
-    Email?: string;
-    Undergraduate?: boolean;
+    id?: any;
+    code?: string;
+    surname?: string;
+    lastName?: string;
+    email?: string;
+    undergraduate?: boolean;
 }
