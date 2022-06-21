@@ -1,22 +1,35 @@
-<div class="form-group">
-    <form class="form-control" *ngIf="!this.validUsername" #logInForm="ngForm" >
-        <label class="col-sm-2 control-label" for="username">Código de Usuario</label>
-        <input type="text" minlength="9" maxlength="9" size="20" class="form-group" placeholder="Ingrese su código UPC" id="username" name="username" id="ngModel" [(ngModel)]="credentials.Username" #username="ngModel" required/>
-        <div class="btn-primary btn-sm btn-default" (click)="getUsername()">
-            <button class="btn btn-primary" type="submit" [disabled]="!logInForm.form.valid">Siguiente</button>
-        </div>
-    </form>
-    <form class="form-group" *ngIf="this.validUsername && !this.loggedIn" #logInForm2="ngForm">
-        <label class="control-label" for="password">Contraseña</label>
-        <input type="password" class="form-control" minlength="8" maxlength="25" size="20" placeholder="Ingrese su contraseña" id="password" name="password" [(ngModel)]="credentials.Password" #password="ngModel" required>
-        <div class="btn-primary btn-sm btn-default">
-            <button class="btn btn-primary" type="submit" [disabled]="!logInForm2.form.valid" (click)="logIn()">Iniciar sesión</button>
-        </div>
-    </form>
-    <div *ngIf="loggedIn">
-        <h3>¡Inicio de sesión exitoso!</h3>
-        <button class="btn btn-success" routerLink="appointment-list" (click)="newLogIn()">
-            Ir a Home
-        </button>
+<form [formGroup]="form"  *ngIf="!this.validUsername">
+  <div class="mb-3">
+    <label for="username" class="form-label">Código de Usuario</label>
+    <div class="input-group">
+      <span class="input-group-text" required>
+        <i
+          class="fas fa-user"
+          [class.green-icon]="this.form.get('username')?.valid"
+          [class.red-icon]="
+            this.form.get('username')?.invalid &&
+            this.form.get('username')?.touched
+          "
+        ></i>
+      </span>
+      <span class="input-group-text" id="basic-addon1">U</span>
+      <input formControlName="username" type="text" class="form-control-lg" minlength="9" maxlength="9" id="username" aria-describedby="usernameHelp" >
     </div>
+    <div id="usernameHelp" class="form-text">Utilice el código de usuario de la UPC (sin la u)</div>
+  </div>
+  <button [disabled]="this.form.get('username')?.invalid" type="submit" class="btn btn-primary" (click)="getUsername(this.form.get('username')?.value)">Siguiente</button>
+</form>
+<form [formGroup]="form"  *ngIf="this.validUsername && !this.loggedIn">
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input formControlName="password" type="password" class="form-control-lg" minlength="8" maxlength="25" id="password" aria-describedby="passwordHelp" required>
+    <div id="passwordHelp" class="form-text">La contraseña debe contener entre 8 y 25 caracteres, teniendo mínimo una mayúscula, un número y un símbolo</div>
+  </div>
+  <button [disabled]="this.form.get('password')?.invalid" type="submit" class="btn btn-primary" (click)="logIn()">Iniciar sesión</button>
+</form>
+<div *ngIf="loggedIn">
+    <h3>¡Inicio de sesión exitoso!</h3>
+    <button class="btn btn-success" routerLink="appointment-list" (click)="newLogIn()">
+        Ir a Home
+    </button>
 </div>
