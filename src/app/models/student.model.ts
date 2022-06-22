@@ -1,5 +1,5 @@
 export class Student {
-    id?: string;
+    id?: any;
     code?: string;
     dni?: string;
     surname?: string;
