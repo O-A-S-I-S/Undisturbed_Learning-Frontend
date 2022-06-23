@@ -1,3 +1,4 @@
+import { AppointmentRequest } from './../students/models/appointment-request.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -19,5 +20,13 @@ export class AppointmentService {
 
   getByPsychopedagogistId(psychopedagogistId: number): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.baseUrl}/psychopedagogist/${psychopedagogistId}`);
+  }
+
+  createAppointment(appointment: AppointmentRequest):Observable<AppointmentRequest>{
+    return this.http.post<Appointment>(this.baseUrl,appointment);
+  }
+
+  updateAppointmentRating(id?:number, rating?:number):Observable<Appointment>{
+    return this.http.put<Appointment>(`${this.baseUrl+'/'+id+'?rating='+rating}`,rating);
   }
 }

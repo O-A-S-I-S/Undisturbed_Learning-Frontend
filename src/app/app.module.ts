@@ -4,10 +4,10 @@ import { HttpClientModule } from '@angular/common/http'; import { FormsModule, R
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReportListComponent } from './psychopedagogists/components/report-list/report-list.component';
 import { StudentsModule } from './students/students.module';
 import { PsychopedagogistsModule } from './psychopedagogists/psychopedagogists.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import {MatPaginatorModule}from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     StudentsModule,
     PsychopedagogistsModule,
     AuthenticationModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,6 +8,7 @@ import { ReportListComponent } from './components/report-list/report-list.compon
 import { WorkshopListComponent } from './components/workshop-list/workshop-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule,
+    MatPaginatorModule,
   ],
   exports: [
     PsychopedagogistsComponent
