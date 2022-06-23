@@ -1,0 +1,59 @@
+<div id="formulario">
+<h1>FORMULARIO DE CITA</h1>
+
+<form [formGroup]="form" >
+    <div class="input-group input-group-lg mb-3" >
+
+        <input
+          formControlName="Fecha"
+          type="date"
+          dateformat="y M d"
+          class="form-control"
+          placeholder="Fecha"
+          onfocus="this.min=new Date().toISOString().split('T')[0]"
+          
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="Hora"
+        type="number"
+        class="form-control"
+        placeholder="Hora inicio"
+        min="8"
+        max="18"
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="Causa"
+        type="text"
+        class="form-control"
+        placeholder="Causa"
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="psychopedagogistCode"
+        type="text"
+        class="form-control"
+        placeholder="Psychopedagogist"
+        />
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <input
+        formControlName="studentCode"
+        type="text"
+        class="form-control"
+        placeholder="Student"
+        />
+    </div>
+    <button class="cancelar" >
+        <a href="/students/{{this.id}}">Cancelar</a>
+    </button>
+    <button class="crear" (click)="createAppointment()">
+        Crear
+    </button>
+  
+  </form>
+</div>
