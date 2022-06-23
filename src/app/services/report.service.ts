@@ -8,15 +8,15 @@ import { Report } from '../models/report.model';
   providedIn: 'root'
 })
 export class ReportService {
-  baseUrl: string = environment.baseUrl;
+  baseUrl: string = environment.baseUrl + '/Report';
 
   constructor(private http: HttpClient) { }
 
   getByStudentId(studentId: any): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}/{studentId}`);
+    return this.http.get<Report[]>(`${this.baseUrl}/student/${studentId}`);
   }
 
   getByPsychopedagogistId(psychopedagogistId: any): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}/{psychopedagogistId}`);
+    return this.http.get<Report[]>(`${this.baseUrl}/psychopedagogist/${psychopedagogistId}`);
   }
 }

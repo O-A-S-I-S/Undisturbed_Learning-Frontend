@@ -18,12 +18,24 @@ export class StudentService {
     return this.http.get<Student[]>(this.baseUrl);
   }
 
-  getById(Id: number): Observable<Student> {
-    return this.http.get<Student>(`${this.baseUrl}/${Id}`);
+  getById(id: number): Observable<Student> {
+    return this.http.get<Student>(`${this.baseUrl}/id/${id}`);
   }
 
-  getByUsername(Username: any): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/access/${Username}`);
+  getByCode(code: string): Observable<Student> {
+    return this.http.get<Student>(`${this.baseUrl}/code/${code}`);
+  }
+
+  getByUsername(username: string): Observable<Student> {
+    return this.http.get<Student>(`${this.baseUrl}/access/${username}`);
+  }
+
+  getByNameMatch(surname: string, lastName: string): Observable<Student[]> {
+    let namePart = {
+      surname: surname,
+      lastName: lastName,
+    }
+    return this.http.post<Student[]>(`${this.baseUrl}/name`, namePart);
   }
 
   logIn(logIn: LogIn): Observable<any> {

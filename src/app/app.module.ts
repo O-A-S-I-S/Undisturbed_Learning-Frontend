@@ -12,7 +12,6 @@ import { AuthenticationModule } from './authentication/authentication.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ReportListComponent,
   ],
   imports: [
     BrowserAnimationsModule,

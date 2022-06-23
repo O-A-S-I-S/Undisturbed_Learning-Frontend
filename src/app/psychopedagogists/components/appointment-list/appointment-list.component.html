@@ -1,4 +1,10 @@
 <app-psychopedagogists></app-psychopedagogists>
+<div class="container" style="margin: 20px auto">
+    <form [formGroup]="form" class="d-flex" role="search" style="width: 80%; margin-left: 20%">
+        <input formControlName="code" class="form-control me-2" type="search" placeholder="Ingrese el código de alumno" aria-label="CodeSearch" minlength="9" maxlength="9" required>
+        <button class="btn btn-outline-danger" type="submit" (click)="appointmentsByCodeSearch(this.form.get('code')?.value)" [disabled]="this.form.invalid">Buscar</button>
+    </form>
+</div>
 <div class="container">
     <div class="row align-items-center">
         <table class="table table-hover caption-top">
@@ -15,7 +21,7 @@
             <tbody  class="table-group-divider">
                 <tr *ngFor="let appointment of appointments">
                     <th class="table-active">{{appointment.student}}</th>
-                    <td>{{appointment.causeDescription}}</td>
+                    <td>{{appointment.cause}}</td>
                     <td>{{appointment.activity}}</td>
                     <td>{{appointment.virtual ? "Virtual" : "Presencial"}}</td>
                     <td>{{appointment.date}} {{appointment.startTime}}</td>

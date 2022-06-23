@@ -1,1 +1,48 @@
-<p>report-list works!</p>
+<app-psychopedagogists></app-psychopedagogists>
+<div class="container" style="margin: 20px auto">
+    <form [formGroup]="form" class="d-flex" role="search" style="width: 80%; margin: auto">
+        <input formControlName="code" class="form-control me-2" type="search" placeholder="Ingrese el código de alumno" aria-label="CodeSearch" minlength="9" maxlength="9" required>
+        <button class="btn btn-outline-danger" type="submit" (click)="reportsByCodeSearch(this.form.get('code')?.value)" [disabled]="this.form.get('code')?.invalid">Buscar</button>
+    </form>
+</div>
+<div class="container" style="margin: 20px auto">
+        <form [formGroup]="form" role="search" style="width: 100%; margin-left: 12%">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <input formControlName="surname" class="form-control me-2" type="search" placeholder="Ingrese el nombre de alumno" aria-label="SurnameSearch">
+                </div>
+                <div class="col">
+                    <input formControlName="lastName" class="form-control me-2" type="search" placeholder="Ingrese el apellido de alumno" aria-label="LastNameSearch">
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-dark" type="submit" (click)="reportsByNameSearch(this.form.get('surname')?.value, this.form.get('lastName')?.value)" [disabled]="this.form.get('surname')?.invalid && this.form.get('lastName')?.invalid">Buscar</button>
+                </div>
+            </div>
+        </form>
+</div>
+<div class="container">
+    <div class="row align-items-center">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-danger">
+                    <th *ngIf="filtered" scope="col">Profesional</th>
+                    <th *ngIf="!filtered" scope="col">Estudiante</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Motivo</th>
+                    <th scope="col">Resolución</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody  class="table-group-divider">
+                <tr *ngFor="let report of reports">
+                    <th *ngIf="filtered" class="table-active">{{report.psychopedagogist}}</th>
+                    <th *ngIf="!filtered" class="table-active">{{report.student}}</th>
+                    <td>{{report.activity}}</td>
+                    <td>{{report.cause}}</td>
+                    <td>{{report.resolution?.substring(0, 50)}}<p *ngIf="report.resolution != undefined && report.resolution.length > 50" style="display: inline-block">...</p></td>
+                    <td>{{report.date}}</td>
+                </tr>
+            </tbody>    
+        </table>
+    </div>
+</div>

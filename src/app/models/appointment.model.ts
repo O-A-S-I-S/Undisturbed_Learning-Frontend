@@ -6,6 +6,7 @@ export class Appointment {
     psychopedagogistId?: any;
     psychopedagogist?: string;
     activity?: string;
+    cause?: string;
     causeDescription?: string;
     virtual?: boolean;
     date?: string;
