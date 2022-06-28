@@ -42,17 +42,51 @@ export class AppointmentListComponent implements OnInit {
       error: (err) => console.log(err),
     });
   }
+  
+  updateReminder(id: number): void {
+    if (this.appointments == undefined) return;
+    for (let appointment of this.appointments){
+      if (appointment.id == id){
+        if (appointment.date != undefined){
+          var currentDate = new Date();
+          var split = appointment.date.split('/');
+          console.log(appointment.date);
+          var appointmentDate = new Date(parseInt(split[2]), parseInt(split[0]) - 1, parseInt(split[1]));
+          if (appointmentDate < currentDate){
+            this.toastr.error('Solo se puede registrar recordatorio para citas pendientes', 'Error');
+            return;
+          }
+        }
+
+        const update = {
+          reminderPsychopedagogist: !appointment.reminder,
+        };
+        this.appointmentService.updateAppointment(id, update).subscribe({
+          next: (data) => {
+            const confirmationId = {
+              id: data.id,
+            }
+            appointment.reminder = !appointment.reminder;
+          },
+          error: (err) => {
+            console.log(err);
+            this.toastr.error('No se pudo registrar el recordatorio', 'Actualización fallida');
+          }
+        })
+      return;
+      }
+    }
+  }
 
   appointmentsByCodeSearch(studentCode: string): void {
     this.studentService.getByCode(studentCode).subscribe({
       next: (data) => {
         this.student = data;
-        this.toastr.success('El código pertenece a un estudiante', 'Código válido');
 
         this.appointmentService.getByStudentId(this.student.id).subscribe({
           next: (data) => {
             this.appointments = data;
-            this.toastr.success('Se muestran las citas encontradas', 'Búsqueda exitosa');
+            for (let appointment of this.appointments) appointment.student = this.student?.surname + " " + this.student?.lastName;
           },
           error: (err) => {
             console.log(err);

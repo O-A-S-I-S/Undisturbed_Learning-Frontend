@@ -52,13 +52,11 @@ export class ReportListComponent implements OnInit {
     this.studentService.getByCode(studentCode).subscribe({
       next: (data) => {
         this.student = data;
-        this.toastr.success('El código pertenece a un estudiante', 'Código válido');
 
         this.reportService.getByStudentId(this.student.id).subscribe({
           next: (data) => {
             this.reports = data;
             this.filtered = true;
-            this.toastr.success('Se muestran los reportes encontrados', 'Búsqueda exitosa');
           },
           error: (err) => {
             console.log(err);
@@ -78,7 +76,6 @@ export class ReportListComponent implements OnInit {
       next: (data) => {
         this.students = data;
         console.log(data);
-        this.toastr.success('Existe al menos un estudiante con ese nombre', 'Nombre válido');
 
         this.reports = [];
         for (let student of this.students){
@@ -87,7 +84,6 @@ export class ReportListComponent implements OnInit {
               if (this.reports == undefined) this.reports = data;
               else this.reports = this.reports.concat(data);
               this.filtered = true;
-              this.toastr.success('Se muestran los reportes encontrados', 'Búsqueda exitosa');
             },
             error: (err) => {
               console.log(err);

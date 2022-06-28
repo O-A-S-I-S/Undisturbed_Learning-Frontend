@@ -15,4 +15,5 @@ export class Appointment {
     comment?: string;
     reminder?: boolean;
     rating?: any;
+    reportId?: any;
 }

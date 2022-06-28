@@ -56,7 +56,7 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    let validator = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    let validator = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,25}$/;
     if (!data.password.match(validator)){
       this.toastr.error('La contraseña no es lo suficientemente segura', 'Registro fallido');
       return;      
@@ -70,7 +70,7 @@ export class SignInComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-        this.toastr.error('Contraseña no cumple con los requisitos', 'Registro fallido');
+        this.toastr.error('Ya ha registrado una contraseña', 'Registro fallido');
       },
     });
   }

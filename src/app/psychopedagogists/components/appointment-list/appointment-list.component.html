@@ -11,6 +11,9 @@
             <caption>Pendientes</caption>
             <thead>
                 <tr class="table-danger">
+                    <th scope="col"><i class="fa-solid fa-bell"></i></th>
+                    <th><i class="fa-solid fa-file-circle-check"></i></th>
+                    <th><i class="fa-solid fa-comment"></i></th>
                     <th scope="col">Alumn@</th>
                     <th scope="col">Motivo</th>
                     <th scope="col">Actividad</th>
@@ -20,6 +23,13 @@
             </thead>
             <tbody  class="table-group-divider">
                 <tr *ngFor="let appointment of appointments">
+                    <td *ngIf="!appointment.reminder"><div (click)="updateReminder(appointment.id)" id=icon-button><i class="fa-solid fa-bell-slash"></i></div></td>
+                    <td *ngIf="appointment.reminder"><div (click)="updateReminder(appointment.id)" id=icon-button><i class="fa-solid fa-bell" style="color: #06B6D4"></i></div></td>
+                    <td *ngIf="appointment.reportId > 0"><i class="fa-solid fa-circle" style="color: rgb(84, 252, 0);"></i></td>
+                    <td *ngIf="appointment.reportId == 0"><i class="fa-regular fa-circle"></i></td>
+                    <td *ngIF="appointment.comment.length > 0"><i class="fa-solid fa-comment"></i></td>
+                    <td *ngIF="appointment.comment.length == 0"><i class="fa-regular fa-comment"></i></td>
+                    <td><i class="fa-regular fa-comment"></i></td>
                     <th class="table-active">{{appointment.student}}</th>
                     <td>{{appointment.cause}}</td>
                     <td>{{appointment.activity}}</td>

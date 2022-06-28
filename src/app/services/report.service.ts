@@ -12,6 +12,10 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
+  getByAppointmentId(id: number): Observable<Report> {
+    return this.http.get(`${this.baseUrl}/appointment/${id}`);
+  }
+
   getByStudentId(studentId: any): Observable<Report[]> {
     return this.http.get<Report[]>(`${this.baseUrl}/student/${studentId}`);
   }
