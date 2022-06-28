@@ -6,8 +6,8 @@
         <thead>
           <tr class="table-danger">
               <th>Id</th>
-              <th>Start</th>
-              <th>End</th>
+              <th>Fecha</th>
+              <th>Hora</th>
               <th>Title</th>
               <th>Brief</th>
               <th>Text</th>
@@ -23,8 +23,8 @@
             <tr *ngFor="let w of workshops| slice:desde:hasta">
                 
                 <td>{{w.id}}</td>
-                <td>{{w.startTime}}</td>
-                <td>{{w.endTime}}</td>
+                <td>{{w.date}}</td>
+                <td>{{w.startTime}}:{{w.endTime}}</td>
                 <td>{{w.title}}</td>
                 <td>{{w.brief}}</td>
                 <td>{{w.text}}</td>

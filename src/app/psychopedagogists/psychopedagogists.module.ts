@@ -1,3 +1,4 @@
+import { CreateworkshopComponent } from './components/createworkshop/createworkshop.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,7 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     PsychopedagogistsComponent,
     AppointmentListComponent,
     ReportListComponent,
-    WorkshopListComponent
+    WorkshopListComponent,
+    CreateworkshopComponent
   ],
   imports: [
     CommonModule,

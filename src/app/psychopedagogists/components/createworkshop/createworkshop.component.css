@@ -1,0 +1,46 @@
+#formulario{
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    margin-top: 50px;
+    border-color: black;
+    border-radius: 30px;
+    background-color: #e76e6e;
+    /* box-sizing: content-box; */
+    position: relative;
+    display: grid;
+}
+h1{
+    text-align: center;
+    padding-bottom: 0.5em;
+    color: white;
+}
+
+.cancelar{
+    background-color: white;
+    
+    border-radius: 30px;
+    width: 6em;
+    padding: 0.5em;
+}
+.crear{
+    background-color: white;
+    
+   
+    border-radius: 30px;
+    width: 6em;
+    padding: 0.5em;
+
+}
+.cancelar a{
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+.crear a{
+    color: black;
+    text-align: center;
+}
+.form-control{
+    background-color: white;
+}
