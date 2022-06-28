@@ -8,6 +8,7 @@ import { StudentsModule } from './students/students.module';
 import { PsychopedagogistsModule } from './psychopedagogists/psychopedagogists.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import {MatPaginatorModule}from '@angular/material/paginator';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {MatPaginatorModule}from '@angular/material/paginator';
     PsychopedagogistsModule,
     AuthenticationModule,
     MatPaginatorModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
