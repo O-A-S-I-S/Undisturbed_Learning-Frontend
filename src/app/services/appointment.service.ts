@@ -14,12 +14,9 @@ export class AppointmentService {
 
   constructor(private http: HttpClient) { }
 
-  getByStudentId(studentId: number): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/student/${studentId}`);
-  }
-
-  getByPsychopedagogistId(psychopedagogistId: number): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/psychopedagogist/${psychopedagogistId}`);
+  getCustom(filter: any): Observable<Appointment[]> {
+    console.log(filter);
+    return this.http.post<Appointment[]>(`${this.baseUrl}/filter`, filter);
   }
 
   createAppointment(appointment: AppointmentRequest):Observable<AppointmentRequest>{

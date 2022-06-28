@@ -26,7 +26,7 @@ export class AppointmentListComponent implements OnInit {
   }
 
   onDataTable(studentId: number): void {
-    this.appointmentService.getByStudentId(studentId).subscribe({
+    this.appointmentService.getCustom(studentId).subscribe({
       next: (data) => {
         this.appointments = data;
       },

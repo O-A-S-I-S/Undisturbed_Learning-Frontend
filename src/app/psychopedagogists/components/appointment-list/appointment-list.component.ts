@@ -6,6 +6,8 @@ import { Appointment } from 'src/app/models/appointment.model';
 import { Student } from 'src/app/models/student.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { StudentService } from 'src/app/services/student.service';
+import { Activity } from 'src/app/models/activity.model';
+import { Cause } from 'src/app/models/cause.model';
 
 @Component({
   selector: 'app-appointment-list',
@@ -13,9 +15,11 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./appointment-list.component.css']
 })
 export class AppointmentListComponent implements OnInit {
-  psychopedagogistId: number;
   appointments?: Appointment[];
+  activites?: Activity[];
+  causes?: Cause[];
   student?: Student;
+  filter: any;
 
   form: FormGroup;
 
@@ -24,18 +28,19 @@ export class AppointmentListComponent implements OnInit {
               private route: ActivatedRoute, 
               private fb: FormBuilder,
               private toastr: ToastrService) {
-                this.psychopedagogistId = this.route.snapshot.params['id'];
+                this.filter = {};
                 this.form = this.fb.group({
                   code: ['', Validators.required],
                 });
   }
 
   ngOnInit(): void {
-    this.onDataTable(this.psychopedagogistId);
+    this.filter.psychopedagogistId =  this.route.snapshot.params['id'];
+    this.onDataTable();
   }
 
-  onDataTable(psychopedagogistId: number): void {
-    this.appointmentService.getByPsychopedagogistId(psychopedagogistId).subscribe({
+  onDataTable(): void {
+    this.appointmentService.getCustom(this.filter).subscribe({
       next: (data) => {
         this.appointments = data;
       },
@@ -45,6 +50,7 @@ export class AppointmentListComponent implements OnInit {
   
   updateReminder(id: number): void {
     if (this.appointments == undefined) return;
+
     for (let appointment of this.appointments){
       if (appointment.id == id){
         if (appointment.date != undefined){
@@ -82,8 +88,10 @@ export class AppointmentListComponent implements OnInit {
     this.studentService.getByCode(studentCode).subscribe({
       next: (data) => {
         this.student = data;
+        
+        this.filter['studentId'] = this.student.id;
 
-        this.appointmentService.getByStudentId(this.student.id).subscribe({
+        this.appointmentService.getCustom(this.filter).subscribe({
           next: (data) => {
             this.appointments = data;
             for (let appointment of this.appointments) appointment.student = this.student?.surname + " " + this.student?.lastName;
