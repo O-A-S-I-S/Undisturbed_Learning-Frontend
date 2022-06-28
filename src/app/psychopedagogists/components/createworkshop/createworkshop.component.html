@@ -22,6 +22,9 @@
             placeholder="Hora inicio"
             min="8"
             max="18"
+            
+            (change)="onChange()"
+            
             />
         </div>
         <div class="input-group input-group-lg mb-3" >
@@ -32,6 +35,7 @@
             placeholder="Hora final"
             min="8"
             max="18"
+            (change)="checkValue()"
             />
         </div>
         <div class="input-group input-group-lg mb-3" >

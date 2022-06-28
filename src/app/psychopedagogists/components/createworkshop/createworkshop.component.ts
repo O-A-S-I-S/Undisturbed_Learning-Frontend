@@ -38,6 +38,8 @@ export class CreateworkshopComponent implements OnInit {
 
   ngOnInit(): void {
    this.form.get('reminder')?.setValue("true")
+   this.form.get('HoraInicio')?.setValue(8)
+  //  this.form.get('HoraFin')?.setValue(9)
   }
   createWorkshop():void{
     
@@ -84,6 +86,23 @@ export class CreateworkshopComponent implements OnInit {
       }
     })
     
-    console.log(workshop);
+    
+  }
+  onChange(){
+      
+      if(this.form.get('HoraInicio')?.valueChanges){
+        if(this.form.get('HoraInicio')?.value<8)this.form.get('HoraInicio')?.setValue(8) 
+        else if(this.form.get('HoraInicio')?.value>18)this.form.get('HoraInicio')?.setValue(18) 
+        else if (this.form.get('HoraFin')?.value-this.form.get('HoraInicio')?.value==0){this.form.get('HoraFin')?.setValue(this.form.get('HoraInicio')?.value+1)}
+      }
+      
+      
+  }
+  checkValue(){
+    if(this.form.get('HoraFin')?.value<8)this.form.get('HoraFin')?.setValue(this.form.get('HoraInicio')?.value+1) 
+        else if(this.form.get('HoraFin')?.value>18)this.form.get('HoraFin')?.setValue(18) 
+    if(this.form.get('HoraFin')?.value<=this.form.get('HoraInicio')?.value){
+      this.form.get('HoraFin')?.setValue(this.form.get('HoraInicio')?.value+1)
+    }
   }
 }
