@@ -1,21 +1,10 @@
-<form [formGroup]="form"(ngSubmit)="retrieveAllWorkshopsByPsychopedagogistId()">
-    <div class="input-group input-group-lg mb-3">
-        <span class="input-group-text">
-            <button
-                (click)="retrieveAllWorkshopsByPsychopedagogistId()"
-            ><i class="fa-solid fa-magnifying-glass"></i></button>
-        </span>
-        <input
-        formControlName="psychopedagogistId"
-        type="text"
-        class="form-control"
-        placeholder="Code"
-        />
-    </div>
-</form>
-<table class="content-table">
-    <thead>
-          <tr>
+<app-psychopedagogists></app-psychopedagogists>
+
+<div class="row align-items-center">
+
+    <table class="table table-hover caption-top">
+        <thead>
+          <tr class="table-danger">
               <th>Id</th>
               <th>Start</th>
               <th>End</th>
@@ -27,39 +16,40 @@
               <th>Editar</th>
               <th>Eliminar</th>
               
-          </tr>
-      </thead>
-      <tbody>
-        
-        <tr *ngFor="let w of workshops| slice:desde:hasta">
-
-            <td>{{w.id}}</td>
-            <td>{{w.startTime}}</td>
-            <td>{{w.endTime}}</td>
-            <td>{{w.title}}</td>
-            <td>{{w.brief}}</td>
-            <td>{{w.text}}</td>
-            <td>{{w.comment}}</td>
-            <td>{{w.psychopedagogistId}}</td>
-            <td>
-                <i
-                  
-                  class="far fa-edit text-info"
-                ></i>
-              </td>
-            <td>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            
+            <tr *ngFor="let w of workshops| slice:desde:hasta">
+                
+                <td>{{w.id}}</td>
+                <td>{{w.startTime}}</td>
+                <td>{{w.endTime}}</td>
+                <td>{{w.title}}</td>
+                <td>{{w.brief}}</td>
+                <td>{{w.text}}</td>
+                <td>{{w.comment}}</td>
+                <td>{{w.psychopedagogistId}}</td>
+                <td>
+                    <i
+                    
+                    class="far fa-edit text-info"
+                    ></i>
+                </td>
+                <td>
                 <i
                     (click)="deleteWorkshop(w.id)"
                     class="far fa-trash-alt text-danger"
-                ></i>    
-            </td>
-        </tr>
-
-      </tbody>
-  </table>
-  <mat-paginator [length]="workshops?.length"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="[5, 10]"
-  (page)="cambiarpagina($event)"
-  >
+                    ></i>    
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+    <mat-paginator [length]="workshops?.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10]"
+    (page)="cambiarpagina($event)"
+    >
 </mat-paginator>

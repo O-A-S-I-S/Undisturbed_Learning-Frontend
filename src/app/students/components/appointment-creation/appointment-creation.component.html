@@ -3,6 +3,42 @@
 
 <form [formGroup]="form" >
     <div class="input-group input-group-lg mb-3" >
+        <select
+        formControlName="activity"
+        type="text"
+        class="form-control"
+        placeholder="Actividad"
+        
+        >
+        <option value="Grupo de escucha">Grupo de escucha</option>
+        <option value="Contención Psicológica">Contención Psicológica</option>
+       
+        </select>
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <select
+        formControlName="Causa"
+        type="text"
+        class="form-control"
+        placeholder="Causa"
+        
+        >
+        <option value="Estrés">Estrés</option>
+        <option value="Ansiedad">Ansiedad</option>
+        <option value="Ataque de pánico">Ataque de pánico</option>
+        <option value="Estrés elevado">Estrés elevado</option>
+        </select>
+    </div>
+    
+    <div class="input-group input-group-lg mb-3" >
+        
+        <textarea formControlName="causeDescription"
+        type="textarea"
+        class="form-control"
+        placeholder="Cause Description"
+        id="causeDescription"  cols="30" rows="5"></textarea>
+    </div>
+    <div class="input-group input-group-lg mb-3" >
 
         <input
           formControlName="Fecha"
@@ -16,24 +52,6 @@
     </div>
     <div class="input-group input-group-lg mb-3" >
         <input
-        formControlName="Hora"
-        type="number"
-        class="form-control"
-        placeholder="Hora inicio"
-        min="8"
-        max="18"
-        />
-    </div>
-    <div class="input-group input-group-lg mb-3" >
-        <input
-        formControlName="Causa"
-        type="text"
-        class="form-control"
-        placeholder="Causa"
-        />
-    </div>
-    <div class="input-group input-group-lg mb-3" >
-        <input
         formControlName="psychopedagogistCode"
         type="text"
         class="form-control"
@@ -41,19 +59,77 @@
         />
     </div>
     <div class="input-group input-group-lg mb-3" >
+        <select
+        formControlName="Hora"
+        type="number"
+        class="form-control"
+        placeholder="Hora inicio"
+        min="8"
+        max="18"
+        
+        >
+        <option value="8">8:00-8:45</option>
+        <option value="9">9:00-9:45</option>
+        <option value="10">10:00-10:45</option>
+        <option value="11">11:00-11:45</option>
+        <option value="12">12:00-12:45</option>
+        <option value="13">13:00-13:45</option>
+        <option value="14">14:00-14:45</option>
+        <option value="15">15:00-15:45</option>
+        <option value="16">16:00-16:45</option>
+        </select>
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <select
+        formControlName="virtual"
+        type="text"
+        class="form-control"
+        placeholder="Modalidad"
+        
+        >
+        <option value="true">Virtual</option>
+        <option value="false">Presencial</option>
+
+        </select>
+    </div>
+    <div class="input-group input-group-lg mb-3" >
+        <select
+        formControlName="reminderStudent"
+        type="text"
+        class="form-control"
+        placeholder="Recordatorio"
+        
+        >
+        <option value="true">Recordar</option>
+        <option value="false">No recordad</option>
+
+        </select>
+    </div>
+   
+    
+    <!-- <div class="input-group input-group-lg mb-3" >
         <input
         formControlName="studentCode"
         type="text"
         class="form-control"
         placeholder="Student"
         />
-    </div>
-    <button class="cancelar" >
-        <a href="/students/{{this.id}}">Cancelar</a>
-    </button>
-    <button class="crear" (click)="createAppointment()">
-        Crear
-    </button>
-  
-  </form>
+    </div> -->
+    <div class="d-flex justify-content-center">
+        <div class="col-3">
+
+            <button class="cancelar" >
+                <a href="/students/{{this.id}}">Cancelar</a>
+            </button>
+        </div>
+        <div class="col-3">
+
+            <button class="crear" (click)="createAppointment()">
+                Crear
+            </button>
+        </div>
 </div>
+    
+</form>
+</div>
+

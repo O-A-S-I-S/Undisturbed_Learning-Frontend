@@ -18,15 +18,15 @@ h1{
 
 .cancelar{
     background-color: white;
-    margin-left: 22em;
+    
     border-radius: 30px;
     width: 6em;
     padding: 0.5em;
 }
 .crear{
     background-color: white;
-    margin-right: 22em;
-    margin-left: 10px;
+    
+    /* margin-left: 10px; */
     border-radius: 30px;
     width: 6em;
     padding: 0.5em;
@@ -44,3 +44,13 @@ h1{
 .form-control{
     background-color: white;
 }
+#causeDescription{
+    /* background-color: #e76e6e; */
+    overflow-wrap: break-word;
+    height: fit-content;
+}
+/* #botones{
+    margin: auto;
+    text-align: center;
+    align-content: center;
+} */

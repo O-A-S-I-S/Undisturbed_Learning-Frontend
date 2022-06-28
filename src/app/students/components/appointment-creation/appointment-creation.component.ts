@@ -25,38 +25,55 @@ export class AppointmentCreationComponent implements OnInit {
         Fecha:['',Validators.required],
         Hora:['',Validators.required],
         Causa:['',Validators.required],
-        Recordatorio:['',Validators.required],
         psychopedagogistCode:['',Validators.required],
-        studentCode:['',Validators.required],
+        causeDescription:['',Validators.required],
+        activity:['',Validators.required],
+        virtual:['',Validators.required],
+        reminderStudent:['',Validators.required],
       })
      }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.form.get('Causa')?.setValue("Estrés")
+    this.form.get('Hora')?.setValue("8")
+    // this.form.get('Actividad')?.setValue("Contención Psicológica")
+    this.form.get('activity')?.setValue("Grupo de escucha")
+    this.form.get('virtual')?.setValue("true")
+    this.form.get('reminderStudent')?.setValue("true")
+  }
 
   createAppointment():void{
     const fecha=this.form.get('Fecha')?.value;
     const hora=this.form.get('Hora')?.value;
-    
     var fechaformatoInicio;
     var fechaformatoFin;
     if(hora<10){
-       fechaformatoInicio=fecha+'T'+'0'+hora+':00:00';
-       fechaformatoFin=fecha+'T'+'0'+hora+':45:00';
+      fechaformatoInicio=fecha+'T'+'0'+hora+':00:00';
+      fechaformatoFin=fecha+'T'+'0'+hora+':45:00';
     }
     else{
-       fechaformatoInicio=fecha+'T'+hora+':00:00';
-       fechaformatoFin=fecha+'T'+hora+':45:00';
+      fechaformatoInicio=fecha+'T'+hora+':00:00';
+      fechaformatoFin=fecha+'T'+hora+':45:00';
     }
+    var virtuality;
+    var reminderstudent;
+    if(this.form.get('virtual')?.value=="true")virtuality=true
+    else virtuality=false
+    if(this.form.get('reminderStudent')?.value=="true")reminderstudent=true
+    else reminderstudent=false
 
     const appointment: AppointmentRequest={
-      start:fechaformatoInicio,
+      start:fechaformatoInicio,    
       end:fechaformatoFin,
-      cause:this.form.get('cause')?.value,
+      activity:this.form.get('activity')?.value,
+      cause:this.form.get('Causa')?.value,
       causeDescription:this.form.get('causeDescription')?.value,
-      psychopedagogistId:this.form.get('psychopedagogistId')?.value,
-      studentId:this.form.get('studentId')?.value,
+      virtual:virtuality,
+      reminderStudent:reminderstudent,
+      psychopedagogistId:this.form.get('psychopedagogistCode')?.value,
+      studentId:this.id,
     }
-
+    console.log(appointment)
     this.appointmentService.createAppointment(appointment).subscribe({
       next:(data)=>{
         this.form.reset();
@@ -64,6 +81,7 @@ export class AppointmentCreationComponent implements OnInit {
       },
       error:(err)=>{
         console.log(err);
+        
         this.toastr.error('Completa los datos correctamente', 'Registro fallido');
       }
     })

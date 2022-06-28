@@ -5,6 +5,7 @@ export class AppointmentRequest {
     cause?:string;
     causeDescription?:string;
     virtual?:boolean;
-    psychopedagogistId?:string;
-    studentId?:string;
+    reminderStudent?:boolean;
+    psychopedagogistId?:number;
+    studentId?:number;
 }

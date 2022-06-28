@@ -1,3 +1,4 @@
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
@@ -13,22 +14,25 @@ import { WorkshopService } from 'src/app/services/workshop.service';
 export class WorkshopListComponent implements OnInit {
   workshops?:Workshop[];
   form:FormGroup;
+
+  psychopedagogistId: number;
   pageSize=5;
   desde:number=0;
   hasta:number=5;
   constructor(
     private workshopService:WorkshopService,
     private fb: FormBuilder,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,private route:ActivatedRoute) {
       this.form=this.fb.group({
         psychopedagogistId:['',Validators.required]
       })
-     
+      this.psychopedagogistId = this.route.snapshot.params['id'];
       
       
      }
 
   ngOnInit(): void {
+    this.retrieveAllWorkshopsByPsychopedagogistId()
   }
   cambiarpagina(e:PageEvent){
     console.log(e);
@@ -37,8 +41,8 @@ export class WorkshopListComponent implements OnInit {
   }
   retrieveAllWorkshopsByPsychopedagogistId():void{
     
-    const c=this.form.get('psychopedagogistId')?.value;
-    this.workshopService.getAllWorkshopsByPsychopedagogistId(c).subscribe({
+    // const c=this.form.get('psychopedagogistId')?.value;
+    this.workshopService.getAllWorkshopsByPsychopedagogistId(this.psychopedagogistId).subscribe({
       next:(data)=>{
 
         this.workshops=data;
