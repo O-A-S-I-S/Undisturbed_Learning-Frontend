@@ -9,6 +9,7 @@ import { WorkshopListComponent } from './components/workshop-list/workshop-list.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { WorkshopCreationComponent } from './components/workshop-creation/workshop-creation.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     PsychopedagogistsComponent,
     AppointmentListComponent,
     ReportListComponent,
-    WorkshopListComponent
+    WorkshopListComponent,
+    WorkshopCreationComponent
   ],
   imports: [
     CommonModule,

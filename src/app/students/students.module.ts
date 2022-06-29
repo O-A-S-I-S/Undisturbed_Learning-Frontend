@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AppointmentCreationComponent } from './components/appointment-creation/appointment-creation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReportShowComponent } from './components/report-show/report-show.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StudentsComponent,
     AppointmentListComponent,
     AppointmentCreationComponent,
+    ReportShowComponent,
   ],
   imports: [
     CommonModule,

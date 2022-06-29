@@ -1,0 +1,94 @@
+<app-psychopedagogists></app-psychopedagogists>
+<div id="formulario">
+    <h1>FORMULARIO DE CREACION DE WORKSHOP</h1>
+    
+    <form [formGroup]="form">
+        <div class="input-group input-group-lg mb-3" >
+    
+            <input
+              formControlName="Fecha"
+              type="date"
+              dateformat="y M d"
+              class="form-control"
+              placeholder="Fecha"
+              onfocus="this.min=new Date().toISOString().split('T')[0]"
+            />
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+            <input
+            formControlName="HoraInicio"
+            type="number"
+            class="form-control"
+            placeholder="Hora inicio"
+            min="8"
+            max="18"
+            
+            (change)="onChange()"
+            
+            />
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+            <input
+            formControlName="HoraFin"
+            type="number"
+            class="form-control"
+            placeholder="Hora final"
+            min="8"
+            max="18"
+            (change)="checkValue()"
+            />
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+            <input
+            formControlName="Titulo"
+            type="text"
+            class="form-control"
+            placeholder="Titulo"
+            />
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+            <input
+            formControlName="Brief"
+            type="text"
+            class="form-control"
+            placeholder="Brief"
+            />
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+            <textarea formControlName="Text"
+        type="textarea"
+        class="form-control"
+        placeholder="Text"
+        id="causeDescription"  cols="30" rows="5"></textarea>
+        </div>
+        <div class="input-group input-group-lg mb-3" >
+            <select
+            formControlName="reminder"
+            type="text"
+            class="form-control"
+            placeholder="Establecer recordatorio"
+            
+            >
+            <option value="true">Recordar</option>
+            <option value="false">No recordar</option>
+    
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="col-3">
+
+                <button class="cancelar" >
+                    <a routerLink="/psychopedagogists/{{this.psychopedagogistId}}">Cancelar</a>
+                </button>
+            </div>
+            <div class="col-3">
+
+                <button (click)="createWorkshop()" class="crear" >
+                    Crear
+                </button>
+            </div>
+    </div>
+      
+      </form>
+    </div>

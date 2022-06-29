@@ -26,7 +26,7 @@ h1{
 .crear{
     background-color: white;
     
-    /* margin-left: 10px; */
+   
     border-radius: 30px;
     width: 6em;
     padding: 0.5em;
@@ -44,13 +44,3 @@ h1{
 .form-control{
     background-color: white;
 }
-#causeDescription{
-    /* background-color: #e76e6e; */
-    overflow-wrap: break-word;
-    height: fit-content;
-}
-/* #botones{
-    margin: auto;
-    text-align: center;
-    align-content: center;
-} */
