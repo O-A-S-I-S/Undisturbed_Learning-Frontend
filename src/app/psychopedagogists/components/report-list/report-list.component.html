@@ -20,10 +20,10 @@
             </div>
             <div class="row justify-content-center" style="margin-bottom: 20px">
                 <div *ngIf="ownReports" class="col-auto" style="margin: 0">
-                    <button (click)="this.ownReports = !this.ownReports" type="button" class="btn btn-dark">Mis reportes</button>
+                    <button (click)="this.ownReports = !this.ownReports; this.filterReports();" type="button" class="btn btn-dark">Mis reportes</button>
                 </div>
                 <div *ngIf="!ownReports" class="col-auto" >
-                    <button (click)="this.ownReports = !this.ownReports" type="button" class="btn btn-light" >Mis reportes</button>
+                    <button (click)="this.ownReports = !this.ownReports; this.filterReports();" type="button" class="btn btn-light" >Mis reportes</button>
                 </div>
                 <div class="col-auto">
                     <input formControlName="startDate" class="form-control" type="date" aria-label="Start Date">
@@ -55,7 +55,7 @@
                 <tr *ngFor="let report of reports">
                     <th class="table-active">{{report.psychopedagogist}}</th>
                     <th class="table-active">{{report.student}}</th>
-                    <th *ngIf="this.searchByName" scope="col">Código</th>
+                    <th *ngIf="this.searchByName" scope="col">{{report.studentCode}}</th>
                     <td>{{report.activity}}</td>
                     <td>{{report.cause}}</td>
                     <td>{{report.resolution?.substring(0, 50)}}<p *ngIf="report.resolution != undefined && report.resolution.length > 50" style="display: inline-block">...</p></td>

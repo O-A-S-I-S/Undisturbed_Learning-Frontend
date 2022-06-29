@@ -59,6 +59,7 @@ export class ReportListComponent implements OnInit {
 
         this.reportService.getCustom(this.filter).subscribe({
           next: (data) => {
+            this.searchByName = false;
             this.reports = data;
           },
           error: (err) => {
@@ -86,6 +87,7 @@ export class ReportListComponent implements OnInit {
       const endDate = this.form.get('endDate')?.value;   
       this.filter.endDate = endDate.slice(5, 7) + '/' + endDate.slice(8) + '/' + endDate.slice(0, 4);
     }
+    if (this.ownReports) this.filter.psychopedagogistId =  this.route.snapshot.params['id'];
 
     this.reportService.getCustom(this.filter).subscribe({
       next: (data) => {
@@ -108,9 +110,10 @@ export class ReportListComponent implements OnInit {
           this.filter.studentId = student.id;
           this.reportService.getCustom(this.filter).subscribe({
             next: (data) => {
-              for (let report of data) report.studentCode = this.student?.code; 
+              for (let report of data) report.studentCode = student.code; 
               if (this.reports == undefined) this.reports = data;
               else this.reports = this.reports.concat(data);
+              this.searchByName = true;
             },
             error: (err) => {
               console.log(err);
