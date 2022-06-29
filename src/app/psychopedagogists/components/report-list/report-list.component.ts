@@ -17,7 +17,9 @@ export class ReportListComponent implements OnInit {
   reports?: Report[];
   student?: Student;
   students?: Student[];
-  filtered: boolean = false;
+  searchByName: boolean;
+  ownReports: boolean;
+  filter: any;
 
   form:  FormGroup;
 
@@ -26,26 +28,26 @@ export class ReportListComponent implements OnInit {
               private route: ActivatedRoute, 
               private fb: FormBuilder,
               private toastr: ToastrService) {
+                this.filter = {};
+                this.searchByName = false;
+                this.ownReports = false;
                 this.psychopedagogistId = this.route.snapshot.params['id'];
                 this.form = this.fb.group({
                   code: ['', Validators.required],
                   surname: ['', Validators.required],
                   lastName: ['', Validators.required],
+                  startDate: ['', Validators.required],
+                  endDate: ['', Validators.required],
                 });
   }
 
   ngOnInit(): void {
-    this.onDataTable(this.psychopedagogistId);
   }
 
-  onDataTable(psychopedagogistId: number): void {
-    this.reportService.getByPsychopedagogistId(psychopedagogistId).subscribe({
-      next: (data) => {
-        this.reports = data;
-      },
-      error: (err) => console.log(err),
-    });
-    this.filtered = false;
+  cleanFilters(): void {
+    this.form.reset(); 
+    this.student = new Student()
+    this.filter = {};
   }
 
   reportsByCodeSearch(studentCode: string): void {
@@ -53,10 +55,11 @@ export class ReportListComponent implements OnInit {
       next: (data) => {
         this.student = data;
 
-        this.reportService.getByStudentId(this.student.id).subscribe({
+        this.filter.studentId = this.student.id;
+
+        this.reportService.getCustom(this.filter).subscribe({
           next: (data) => {
             this.reports = data;
-            this.filtered = true;
           },
           error: (err) => {
             console.log(err);
@@ -71,19 +74,43 @@ export class ReportListComponent implements OnInit {
     });
   }
 
+  filterReports(): void {
+    this.filter = {};
+
+    if (this.student != undefined) this.filter.studentId = this.student.id;
+    if (this.form.get('startDate')?.valid){
+      const startDate = this.form.get('startDate')?.value;   
+      this.filter.startDate = startDate.slice(5, 7) + '/' + startDate.slice(8) + '/' + startDate.slice(0, 4);
+    }
+    if (this.form.get('endDate')?.valid){
+      const endDate = this.form.get('endDate')?.value;   
+      this.filter.endDate = endDate.slice(5, 7) + '/' + endDate.slice(8) + '/' + endDate.slice(0, 4);
+    }
+
+    this.reportService.getCustom(this.filter).subscribe({
+      next: (data) => {
+        this.reports = data;
+      },
+      error: (err) => {
+        console.log(err);
+        this.toastr.error('No se encontraron reportes', 'Sin resultados');
+      }
+    });
+  }
+
   reportsByNameSearch(surname: string, lastName: string): void {
     this.studentService.getByNameMatch(surname, lastName).subscribe({
       next: (data) => {
         this.students = data;
-        console.log(data);
 
         this.reports = [];
         for (let student of this.students){
-          this.reportService.getByStudentId(student.id).subscribe({
+          this.filter.studentId = student.id;
+          this.reportService.getCustom(this.filter).subscribe({
             next: (data) => {
+              for (let report of data) report.studentCode = this.student?.code; 
               if (this.reports == undefined) this.reports = data;
               else this.reports = this.reports.concat(data);
-              this.filtered = true;
             },
             error: (err) => {
               console.log(err);
@@ -97,5 +124,7 @@ export class ReportListComponent implements OnInit {
         this.toastr.error('El nombre ingresado no pertenece a ningún estudiante', 'Nombre incorrecto');
       }
     });
+
+    this.cleanFilters();
   }
 }

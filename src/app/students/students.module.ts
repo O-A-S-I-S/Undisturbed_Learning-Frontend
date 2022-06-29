@@ -7,6 +7,7 @@ import { AppointmentListComponent } from './components/appointment-list/appointm
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AppointmentCreationComponent } from './components/appointment-creation/appointment-creation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({

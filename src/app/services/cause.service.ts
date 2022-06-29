@@ -8,7 +8,7 @@ import { Cause } from '../models/cause.model';
   providedIn: 'root'
 })
 export class CauseService {
-  baseUrl = environment.baseUrl + 'Cause';
+  baseUrl = environment.baseUrl + '/Cause';
 
   constructor(private http: HttpClient) { }
 

@@ -15,7 +15,6 @@ export class AppointmentService {
   constructor(private http: HttpClient) { }
 
   getCustom(filter: any): Observable<Appointment[]> {
-    console.log(filter);
     return this.http.post<Appointment[]>(`${this.baseUrl}/filter`, filter);
   }
 

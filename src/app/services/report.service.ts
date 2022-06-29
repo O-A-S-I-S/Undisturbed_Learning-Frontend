@@ -16,11 +16,7 @@ export class ReportService {
     return this.http.get(`${this.baseUrl}/appointment/${id}`);
   }
 
-  getByStudentId(studentId: any): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}/student/${studentId}`);
-  }
-
-  getByPsychopedagogistId(psychopedagogistId: any): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}/psychopedagogist/${psychopedagogistId}`);
+  getCustom(filter: any): Observable<Report[]> {
+    return this.http.post<Report[]>(`${this.baseUrl}/filter`, filter);
   }
 }

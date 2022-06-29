@@ -1,8 +1,52 @@
 <app-psychopedagogists></app-psychopedagogists>
 <div class="container" style="margin: 20px auto">
-    <form [formGroup]="form" class="d-flex" role="search" style="width: 80%; margin-left: 20%">
-        <input formControlName="code" class="form-control me-2" type="search" placeholder="Ingrese el código de alumno" aria-label="CodeSearch" minlength="9" maxlength="9" required>
-        <button class="btn btn-outline-danger" type="submit" (click)="appointmentsByCodeSearch(this.form.get('code')?.value)" [disabled]="this.form.invalid">Buscar</button>
+    <form [formGroup]="form" class="d-flex" role="search" style="width: 100%">
+        <button (click)="this.cleanFilters()" type="button" class="btn btn-warning" style="margin: 0 3rem 0 2rem"><i class="fa-solid fa-trash-can"></i>Limpiar filtros</button>
+        <input formControlName="code" class="form-control me-2" type="search" placeholder="Ingrese el código de alumno" aria-label="CodeSearch" minlength="9" maxlength="9" style="width: 75%" required>
+        <button class="btn btn-outline-danger" type="submit" (click)="appointmentsByCodeSearch(this.form.get('code')?.value)" [disabled]="this.form.get('code')?.invalid">Buscar</button>
+    </form>
+</div>
+<div class="container" style="margin: 20px auto">
+    <form [formGroup]="form">
+        <div class="container" style="width: 35%; display: inline-block; margin: 0.5rem 0">
+            <select formControlName="activity" class="form-select" aria-label="Seleccionar actividad">
+                <optgroup label="Seleccionar actividad">
+                    <!-- <option selected disabled>Seleccione la actividad</option> -->
+                    <!-- <option hidden>Seleccione la actividad</option> -->
+                    <option *ngFor="let activity of activities" value="{{activity.name}}">{{activity.name}}</option>
+                </optgroup>
+            </select>
+        </div>
+        <div style="width: 20%; display: inline-block; margin: 0.5rem">
+            <select formControlName="cause" class="form-select" aria-label="Seleccionar causa">
+                <optgroup label="Seleccionar actividad">
+                    <option hidden>Seleccione una causa</option>
+                    <option *ngFor="let cause of causes" value="{{cause.name}}">{{cause.name}}</option>
+                </optgroup>
+            </select>
+        </div>
+        <div style="width: 17%; display: inline-block; margin: 0.5rem">
+            <select formControlName="virtual" class="form-select" aria-label="Seleccionar modalidad">
+                <optgroup label="Seleccionar modalidad">
+                    <option value=0>Presencial</option>
+                    <option value=1>Virtual</option>
+                </optgroup>
+            </select>
+        </div>
+        <div style="width: 17%; display: inline-block; margin: 0.5rem">
+            <select formControlName="pending" class="form-select" aria-label="Seleccionar modalidad">
+                <optgroup label="Seleccione pendiente">
+                    <option value=0>Reporte</option>
+                    <option value=1>Comentario</option>
+                </optgroup>
+            </select>
+        </div>
+        <button class="btn btn-outline-info" type="submit" (click)="filterAppointments()" [disabled]="this.form.get('activity')?.invalid && this.form.get('cause')?.invalid && this.form.get('virtual')?.invalid && this.form.get('pending')?.invalid " style="margin-left: 0.5rem">Aplicar</button>
+    </form>
+</div>
+<div class="container" style="margin: 20px auto">
+    <form [formGroup]="form">
+    
     </form>
 </div>
 <div class="container">
@@ -26,9 +70,8 @@
                     <td *ngIf="appointment.reminder"><div (click)="updateReminder(appointment.id)" id=icon-button><i class="fa-solid fa-bell" style="color: #06B6D4"></i></div></td>
                     <td *ngIf="appointment.reportId > 0"><i class="fa-solid fa-circle" style="color: rgb(84, 252, 0);"></i></td>
                     <td *ngIf="appointment.reportId == 0"><i class="fa-regular fa-circle"></i></td>
-                    <td *ngIF="appointment.comment.length > 0"><i class="fa-solid fa-comment"></i></td>
-                    <td *ngIF="appointment.comment.length == 0"><i class="fa-regular fa-comment"></i></td>
-                    <td><i class="fa-regular fa-comment"></i></td>
+                    <td *ngIf="appointment.comment != undefined && appointment.comment.length > 0"><i class="fa-solid fa-comment"></i></td>
+                    <td *ngIf="appointment.comment != undefined && appointment.comment.length == 0"><i class="fa-regular fa-comment"></i></td>
                     <th class="table-active">{{appointment.student}}</th>
                     <td>{{appointment.cause}}</td>
                     <td>{{appointment.activity}}</td>
