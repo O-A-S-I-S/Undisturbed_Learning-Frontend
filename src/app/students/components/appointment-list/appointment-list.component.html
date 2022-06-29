@@ -1,4 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Font Awesome Icons</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <app-students></app-students>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="background-color:rgb(254, 4, 4);">
+      <h4 class="modal-title" id="modal-basic-title" style="color:rgb(255, 255, 255);">Comentarios de la cita</h4>
+      <button type="button" class="fa fa-close" aria-label="Close" (click)="d('Cross click')" style = "border:hidden;"></button>
+    </div>
+    <div class="modal-body">
+      <ul *ngIf="appointmentSelected; else notFound">
+        <p *ngIf = "appointmentSelected.comment != ''; else notComments"> 
+          Datetime: {{appointmentSelected.date}} - {{appointmentSelected.startTime}} <br>
+          Comments: {{appointmentSelected.comment}}
+        </p>
+      </ul>
+    <ng-template #notFound>No existen citas</ng-template>
+    <ng-template #notComments>No hay comentarios asignados</ng-template>
+    </div>
+  </ng-template>
 <div class="container">
     <div class="row align-items-center">
         <table class="table table-hover caption-top">
@@ -9,6 +32,8 @@
                     <th scope="col">Profesional</th>
                     <th scope="col">Modalidad</th>
                     <th scope="col">Fecha y hora</th>
+                    <th scope="col">Reporte</th>
+                    <th scope="col">Comentario</th>
                 </tr>
             </thead>
             <tbody  class="table-group-divider">
@@ -17,6 +42,26 @@
                     <td>{{appointment.psychopedagogist}}</td>
                     <td>{{appointment.virtual ? "Virtual" : "Presencial"}}</td>
                     <td>{{appointment.date}} {{appointment.startTime}}</td>
+                    <td>
+                      <button style="border: hidden; background-color: rgba(240, 248, 255, 0);" (click)="popActivated(appointment.id)">
+                        <a routerLink="reports/{{appointment.id}}"> 
+                          <i class="fa fa-file" >
+                          </i>
+                        </a>
+                      </button>
+                    </td>
+                    <td *ngIf = "appointment.comment != ''; else notComment">
+                      <button style="border: hidden; background-color: rgba(240, 248, 255, 0);" (click)="open_modal(content, appointment)"
+                      ><i
+                      class="fa fa-comment"></i></button>
+                    </td>
+                    <ng-template #notComment>
+                      <td>
+                        <button   style="border: hidden; background-color: rgba(240, 248, 255, 0);"                 
+                        ><i 
+                        class="fa fa-smile"></i></button>
+                      </td>
+                    </ng-template>
                 </tr>
             </tbody>    
         </table>
