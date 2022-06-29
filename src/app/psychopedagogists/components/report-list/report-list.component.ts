@@ -101,6 +101,7 @@ export class ReportListComponent implements OnInit {
   }
 
   reportsByNameSearch(surname: string, lastName: string): void {
+    this.cleanFilters();
     this.studentService.getByNameMatch(surname, lastName).subscribe({
       next: (data) => {
         this.students = data;
