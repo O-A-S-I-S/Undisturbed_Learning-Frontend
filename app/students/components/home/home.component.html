@@ -32,7 +32,7 @@
                             <span><b> Profesional: </b> {{ap.psychopedagogist}} </span> <br>
                             <span *ngIf="ap.virtual; else presencial"><b>  Modalidad:</b>  Virtual </span> <br>
                             <span><b>Hora y Fecha:</b>  {{ap.startTime}} - {{ap.date}} </span> <br>
-                            <ng-template #presencial><span><b> Modalidad: </b> Presencial </span> <br> </ng-template>
+                            <ng-template #presencial><span><b> Modalidad: </b> Presencial </span> </ng-template>
                         </span>
                     </div>
                     <ng-template #notAppointments> <p>No tiene citas registradas</p> </ng-template>
