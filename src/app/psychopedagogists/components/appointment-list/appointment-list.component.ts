@@ -123,7 +123,6 @@ export class AppointmentListComponent implements OnInit {
 
   cleanFilters(): void {
     this.form.reset(); 
-    this.student = new Student()
     this.filter = {};
     this.filter.psychopedagogistId =  this.route.snapshot.params['id'];
 

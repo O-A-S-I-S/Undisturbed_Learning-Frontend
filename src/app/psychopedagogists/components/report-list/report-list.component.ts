@@ -46,7 +46,6 @@ export class ReportListComponent implements OnInit {
 
   cleanFilters(): void {
     this.form.reset(); 
-    this.student = new Student()
     this.filter = {};
   }
 
