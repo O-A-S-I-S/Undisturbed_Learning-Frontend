@@ -1,3 +1,7 @@
+import { ActivityService } from 'src/app/services/activity.service';
+import { CauseService } from 'src/app/services/cause.service';
+import { Activity } from 'src/app/models/activity.model';
+import { Cause } from 'src/app/models/cause.model';
 import { PsychopedagogistService } from 'src/app/services/psychopedagogist.service';
 import { Psychopedagogist } from './../../../models/psychopedagogist.model';
 import { Times } from './../../../models/times';
@@ -18,6 +22,8 @@ export class AppointmentCreationComponent implements OnInit {
   id: number;
   form:FormGroup;
   psychotimes?:Times[]
+  causes?:Cause[]
+  activities?:Activity[]
   psychopedagogists?:Psychopedagogist[]
   times=[
     {value:'08:00',label:'08:00-08:30'},
@@ -46,7 +52,8 @@ export class AppointmentCreationComponent implements OnInit {
     private appointmentService:AppointmentService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private toastr: ToastrService,private psychopedagogistService:PsychopedagogistService) {
+    private toastr: ToastrService,private psychopedagogistService:PsychopedagogistService,
+    private causeService:CauseService,private activityService:ActivityService) {
       this.id = this.route.snapshot.params['id'];
 
       this.form=this.fb.group({
@@ -74,6 +81,19 @@ export class AppointmentCreationComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+    this.causeService.getAll().subscribe({
+      next: (data) => {
+        this.causes = data;
+      },
+      error: (err) => console.log(err),
+    });
+    this.activityService.getAll().subscribe({
+      next: (data) => {
+        this.activities = data;
+      },
+      error: (err) => console.log(err),
+    });
+
   }
   print():void{
     // var fecha=this.form.get('Fecha')?.value

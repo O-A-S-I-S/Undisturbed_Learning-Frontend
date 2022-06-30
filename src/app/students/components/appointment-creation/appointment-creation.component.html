@@ -8,14 +8,12 @@
         formControlName="activity"
         type="text"
         class="form-control"
-        placeholder="Actividad"
-        
-        >
-        <option value="Grupo de escucha">Grupo de escucha</option>
-        <option value="Contención Psicológica">Contención Psicológica</option>
-       
+        placeholder="Actividad"   
+        ><option *ngFor="let a of activities" [value]="a.name">{{a.name}}</option>
         </select>
+        
     </div>
+
     <div class="input-group input-group-lg mb-3" >
         <select
         formControlName="Causa"
@@ -23,11 +21,11 @@
         class="form-control"
         placeholder="Causa"
         
-        >
-        <option value="Estrés">Estrés</option>
+        ><option *ngFor="let c of causes" [value]="c.name">{{c.name}}</option>
+        <!-- <option value="Estrés">Estrés</option>
         <option value="Ansiedad">Ansiedad</option>
         <option value="Ataque de pánico">Ataque de pánico</option>
-        <option value="Estrés elevado">Estrés elevado</option>
+        <option value="Estrés elevado">Estrés elevado</option> -->
         </select>
     </div>
     
@@ -59,17 +57,7 @@
         placeholder="Psychopedagogist"
         (change)="updatePsychoTimes()"
         ><option *ngFor="let p of psychopedagogists" [value]="p.id">{{p.surname}} {{p.lastName}}</option>
-        <!-- <option value="8">8:00-8:30</option>
-        <option value="8">8:30-9:00</option>
-        <option value="9">9:00-9:30</option>
-        <option value="8">9:30-10:00</option>
-        <option value="10">10:00-10:30</option>
-        <option value="11">11:00-11:30</option>
-        <option value="12">12:00-12:30</option>
-        <option value="13">13:00-13:30</option>
-        <option value="14">14:00-14:30</option>
-        <option value="15">15:00-15:30</option>
-        <option value="16">16:00-16:30</option> -->
+
         </select>
     </div>
     <div class="input-group input-group-lg mb-3" >
