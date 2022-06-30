@@ -40,7 +40,6 @@
                     Fecha: {{this.apppointment_selected.date}} <br>
                     Hora: {{this.apppointment_selected.startTime}} <br>
                     <p *ngIf="this.apppointment_selected.comment != ''; else noComments">
-                        Comentarios: {{this.apppointment_selected.comment}} <br>
                     </p>
                     <ng-template #noComments> <p>
                         <br>

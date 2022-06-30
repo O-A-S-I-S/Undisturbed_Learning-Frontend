@@ -4,6 +4,8 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
+import { NgbModalConfig } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
 
 @Component({
   selector: 'app-appointment-list',
@@ -13,16 +15,26 @@ import { ActivatedRoute } from '@angular/router';
 export class AppointmentListComponent implements OnInit {
   studentId: any;
   appointments?: Appointment[];
+  selectedAppointment?: Appointment;
 
 
   constructor(private appointmentService: AppointmentService,
               private route: ActivatedRoute,
-              private toastr: ToastrService) { 
+              private toastr: ToastrService,
+              private modalService: NgbModal,
+              config: NgbModalConfig) { 
               this.studentId = this.route.snapshot.params['id'];
+              config.backdrop = true;
+              config.keyboard = true;
   }
 
   ngOnInit(): void {
     this.onDataTable(this.studentId);
+  }
+
+  openModal(content: any, ap:Appointment){
+    this.selectedAppointment = ap;
+    this.modalService.open(content);
   }
 
   onDataTable(studentId: number): void {
