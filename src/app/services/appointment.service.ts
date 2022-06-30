@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Appointment } from '../models/appointment.model';
 import { Report } from '../models/report.model';
+import { Times } from '../models/times';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,8 @@ export class AppointmentService {
 
   updateAppointment(id:number, update:any):Observable<Appointment>{
     return this.http.put<Appointment>(`${this.baseUrl}/update/${id}`,update);
+  }
+  getTimesFromPsycho(id:number,date:string):Observable<Times[]>{
+    return this.http.get<Times[]>(`${this.baseUrl}/psychopedagogist/${id}/${date}`);
   }
 }

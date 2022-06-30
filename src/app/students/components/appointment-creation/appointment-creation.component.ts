@@ -1,9 +1,13 @@
+import { PsychopedagogistService } from 'src/app/services/psychopedagogist.service';
+import { Psychopedagogist } from './../../../models/psychopedagogist.model';
+import { Times } from './../../../models/times';
 import { AppointmentRequest } from './../../models/appointment-request.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-appointment-creation',
@@ -13,12 +17,22 @@ import { ActivatedRoute } from '@angular/router';
 export class AppointmentCreationComponent implements OnInit {
   id: number;
   form:FormGroup;
-
+  psychotimes?:Times[]
+  psychopedagogists?:Psychopedagogist[]
+  times=[
+    {value:'8:00',label:'8:00-8:30'},
+    {value:'8:30',label:'8:30-9:00'},
+    {value:'9:00',label:'9:00-9:30'},
+    {value:'9:30',label:'9:30-10:00'},
+    {value:'10:00',label:'10:00-10:30'},
+    {value:'10:30',label:'10:30-11:00'}
+  ];
+  timesUpdatable=[{value:'',label:''}]
   constructor(
     private appointmentService:AppointmentService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,private psychopedagogistService:PsychopedagogistService) {
       this.id = this.route.snapshot.params['id'];
 
       this.form=this.fb.group({
@@ -40,8 +54,43 @@ export class AppointmentCreationComponent implements OnInit {
     this.form.get('activity')?.setValue("Grupo de escucha")
     this.form.get('virtual')?.setValue("true")
     this.form.get('reminderStudent')?.setValue("true")
+    this.psychopedagogistService.getAll().subscribe({
+      next: (data) => {
+        this.psychopedagogists = data;
+      },
+      error: (err) => console.log(err),
+    });
   }
-
+  print():void{
+    // var fecha=this.form.get('Fecha')?.value
+    // fecha=fecha.split('-')
+    // fecha=fecha[2]+'-'+fecha[1]+'-'+fecha[0]
+    // console.log(fecha);
+  }
+  updatePsychoTimes():void{
+    this.timesUpdatable=[{value:'',label:''}]
+    var addCriteria=true
+    const psychoId=this.form.get('psychopedagogistCode')?.value
+    var fecha=this.form.get('Fecha')?.value
+    fecha=fecha.split('-')
+    fecha=fecha[2]+'-'+fecha[1]+'-'+fecha[0]
+    this.appointmentService.getTimesFromPsycho(psychoId,fecha).subscribe({
+      next:(data)=>{
+        this.psychotimes=data;
+        this.timesUpdatable.pop()
+        for(var a of this.times){
+          addCriteria=true
+          for(var e of this.psychotimes){
+            if(a.value==e.startTime)addCriteria=false
+          }
+          if(addCriteria)this.timesUpdatable.push(a)
+        }
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
   createAppointment():void{
     const fecha=this.form.get('Fecha')?.value;
     const hora=this.form.get('Hora')?.value;
