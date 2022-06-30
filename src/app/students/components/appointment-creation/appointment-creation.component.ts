@@ -20,12 +20,26 @@ export class AppointmentCreationComponent implements OnInit {
   psychotimes?:Times[]
   psychopedagogists?:Psychopedagogist[]
   times=[
-    {value:'8:00',label:'8:00-8:30'},
-    {value:'8:30',label:'8:30-9:00'},
-    {value:'9:00',label:'9:00-9:30'},
-    {value:'9:30',label:'9:30-10:00'},
+    {value:'08:00',label:'08:00-08:30'},
+    {value:'08:30',label:'08:30-09:00'},
+    {value:'09:00',label:'09:00-09:30'},
+    {value:'09:30',label:'09:30-10:00'},
     {value:'10:00',label:'10:00-10:30'},
-    {value:'10:30',label:'10:30-11:00'}
+    {value:'10:30',label:'10:30-11:00'},
+    {value:'11:00',label:'11:00-11:30'},
+    {value:'11:30',label:'11:30-12:00'},
+    {value:'12:00',label:'12:00-12:30'},
+    {value:'12:30',label:'12:30-13:00'},
+    {value:'13:00',label:'13:00-13:30'},
+    {value:'13:30',label:'13:30-14:00'},
+    {value:'14:00',label:'14:00-14:30'},
+    {value:'14:30',label:'14:30-15:00'},
+    {value:'15:00',label:'15:00-17:30'},
+    {value:'15:30',label:'15:30-16:00'},
+    {value:'16:00',label:'16:00-16:30'},
+    {value:'16:30',label:'16:30-17:00'},
+    {value:'17:00',label:'17:00-17:30'},
+    {value:'17:30',label:'17:30-18:00'},
   ];
   timesUpdatable=[{value:'',label:''}]
   constructor(
@@ -93,17 +107,29 @@ export class AppointmentCreationComponent implements OnInit {
   }
   createAppointment():void{
     const fecha=this.form.get('Fecha')?.value;
-    const hora=this.form.get('Hora')?.value;
+    var hora=this.form.get('Hora')?.value;
     var fechaformatoInicio;
     var fechaformatoFin;
-    if(hora<10){
-      fechaformatoInicio=fecha+'T'+'0'+hora+':00:00';
-      fechaformatoFin=fecha+'T'+'0'+hora+':45:00';
+    hora=hora.split(':')
+    var hour=hora[0]
+    var min=hora[1]
+    if(min=='00'){
+      fechaformatoInicio=fecha+'T'+hour+':'+min+':00';
+      fechaformatoFin=fecha+'T'+hour+':30:00';
     }
     else{
-      fechaformatoInicio=fecha+'T'+hora+':00:00';
-      fechaformatoFin=fecha+'T'+hora+':45:00';
+      fechaformatoInicio=fecha+'T'+hour+':'+min+':00';
+      hour=Number(hour)
+      hour=hour+1
+      if(hour<10){
+        fechaformatoFin=fecha+'T'+'0'+hour+':00:00';
+      }
+      else{
+        fechaformatoFin=fecha+'T'+hour+':00:00';
+      }
     }
+    console.log(fechaformatoInicio)
+    console.log(fechaformatoFin)
     var virtuality;
     var reminderstudent;
     if(this.form.get('virtual')?.value=="true")virtuality=true
