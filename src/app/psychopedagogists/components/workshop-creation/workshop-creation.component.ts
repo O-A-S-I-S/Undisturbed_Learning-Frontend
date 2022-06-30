@@ -51,11 +51,24 @@ export class WorkshopCreationComponent implements OnInit {
     var fechaformatoFin;
     if(horaInicio<10){
        fechaformatoInicio=fecha+'T'+'0'+horaInicio+':00:00';
-       fechaformatoFin=fecha+'T'+'0'+horaFin+':00:00';
+       if(horaFin<10){
+
+         fechaformatoFin=fecha+'T'+'0'+horaFin+':00:00';
+        }
+        else{
+          fechaformatoFin=fecha+'T'+horaFin+':00:00';
+        }
     }
     else{
        fechaformatoInicio=fecha+'T'+horaInicio+':00:00';
-       fechaformatoFin=fecha+'T'+horaFin+':00:00';
+       if(horaFin<10){
+
+        fechaformatoFin=fecha+'T'+'0'+horaFin+':00:00';
+       }
+       else{
+         fechaformatoFin=fecha+'T'+horaFin+':00:00';
+       }
+       
     }
    var reminder;
    if(this.form.get('reminder')?.value=="true")reminder=true
@@ -76,6 +89,7 @@ export class WorkshopCreationComponent implements OnInit {
 
 
     }
+    console.log(workshop)
     this.workshopService.addWorkshop(workshop).subscribe({
       next:(data)=>{
         this.form.reset();
