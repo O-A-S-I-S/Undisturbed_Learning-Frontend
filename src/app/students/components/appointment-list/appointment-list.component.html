@@ -36,7 +36,7 @@
                     <td *ngIf="appointment.reminder"><div (click)="updateReminder(appointment.id)" id=icon-button><i class="fa-solid fa-bell" style="color: #06B6D4"></i></div></td>
                     <td *ngIf="appointment.reportId > 0"><a href="/students/{{this.studentId}}/appointments/{{appointment.id}}/report"><i class="fa-solid fa-circle" style="color: rgb(84, 252, 0);"></i></a></td>
                     <td *ngIf="appointment.reportId == 0"><i class="fa-regular fa-circle"></i></td>
-                    <td *ngIf="appointment.comment != undefined && appointment.comment.length > 0" (click)="openModal(content, appointment)"><i class="fa-solid fa-comment"></i></td>
+                    <td *ngIf="appointment.comment != undefined && appointment.comment.length > 0" ><a (click)="openModal(content, appointment)" style="cursor: pointer;"><i class="fa-solid fa-comment"></i></a></td>
                     <td *ngIf="appointment.comment != undefined && appointment.comment.length == 0"><i class="fa-regular fa-comment"></i></td>
                     <th class="table-active">{{appointment.activity}}</th>
                     <td>{{appointment.psychopedagogist}}</td>

@@ -4,8 +4,8 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
-import { NgbModalConfig } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-appointment-list',

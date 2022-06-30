@@ -68,10 +68,10 @@
                 <tr *ngFor="let appointment of appointments">
                     <td *ngIf="!appointment.reminder"><div (click)="updateReminder(appointment.id)" id=icon-button><i class="fa-solid fa-bell-slash"></i></div></td>
                     <td *ngIf="appointment.reminder"><div (click)="updateReminder(appointment.id)" id=icon-button><i class="fa-solid fa-bell" style="color: #06B6D4"></i></div></td>
-                    <td *ngIf="appointment.reportId > 0"><i class="fa-solid fa-circle" style="color: rgb(84, 252, 0);"></i></td>
+                    <td *ngIf="appointment.reportId > 0"><a routerLink="appointments/{{appointment.id}}/report"><i class="fa-solid fa-circle" style="color: rgb(84, 252, 0);"></i></a></td>
                     <td *ngIf="appointment.reportId == 0"><i class="fa-regular fa-circle"></i></td>
                     <td *ngIf="appointment.comment != undefined && appointment.comment.length > 0"><i class="fa-solid fa-comment"></i></td>
-                    <td *ngIf="appointment.comment != undefined && appointment.comment.length == 0"><i class="fa-regular fa-comment"></i></td>
+                    <td *ngIf="appointment.comment != undefined && appointment.comment.length == 0"><a (click)="selectAppointment(content, appointment)" style="cursor: pointer"><i class="fa-regular fa-comment"></i></a></td>
                     <th class="table-active">{{appointment.student}}</th>
                     <td>{{appointment.cause}}</td>
                     <td>{{appointment.activity}}</td>
@@ -82,3 +82,43 @@
         </table>
     </div>
 </div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="background-color:#F87171;">
+      <h4 class="modal-title" id="modal-basic-title" style="color:rgb(255, 255, 255);">Comentarios de la cita</h4>
+      <button type="button" class="fa fa-close" aria-label="Close" (click)="d('Cross click')" style = "border:hidden;"></button>
+    </div>
+    <div class="modal-body">
+        <p> Comentario: {{appointmentSelected?.comment}}</p>
+        <form [formGroup]="formComment" (ngSubmit)="updateComment()">
+            <div class="input-group input-group-lg mb-3">
+              <span class="input-group-text">
+                <i
+                  class="fas fa-comment"
+                  [class.green-icon]="this.formComment.get('comment')?.valid"
+                  [class.red-icon]="
+                    this.formComment.get('comment')?.invalid &&
+                    this.formComment.get('comment')?.touched
+                  "
+                ></i>
+              </span>
+              <input
+                formControlName="comment"
+                type="text"
+                class="form-control"
+                placeholder="Coment"
+              />
+            </div>
+
+            <div class="d-grid gap-2">
+              <button
+                [disabled]="this.formComment.invalid"
+                type="submit"
+                class="btn btn-success btn-lg"
+                style = "background-color: red;"
+              >
+                <i class="fas fa-smile"></i>&nbsp; Aceptar
+              </button>
+            </div>
+          </form>
+    </div>
+  </ng-template>

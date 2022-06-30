@@ -10,6 +10,7 @@ import { Activity } from 'src/app/models/activity.model';
 import { Cause } from 'src/app/models/cause.model';
 import { ActivityService } from 'src/app/services/activity.service';
 import { CauseService } from 'src/app/services/cause.service';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-appointment-list',
@@ -18,12 +19,14 @@ import { CauseService } from 'src/app/services/cause.service';
 })
 export class AppointmentListComponent implements OnInit {
   appointments?: Appointment[];
+  appointmentSelected?: Appointment;
   activities?: Activity[];
   causes?: Cause[];
   student?: Student;
   filter: any;
 
   form: FormGroup;
+  formComment: FormGroup;
 
   constructor(private appointmentService: AppointmentService,
               private studentService: StudentService,
@@ -31,7 +34,9 @@ export class AppointmentListComponent implements OnInit {
               private causeService: CauseService,
               private route: ActivatedRoute, 
               private fb: FormBuilder,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private modalService: NgbModal,
+              config: NgbModalConfig) {
                 this.filter = {};
                 this.form = this.fb.group({
                   code: ['', Validators.required],
@@ -41,7 +46,12 @@ export class AppointmentListComponent implements OnInit {
                   pending: ['', Validators.required],
                   startDate: ['', Validators.required],
                   endDate: ['', Validators.required],
-                });
+                })
+                this.formComment = this.fb.group({
+                  comment: ['', Validators.required],
+                });;
+                config.backdrop = true;
+                config.keyboard = true;
   }
 
   ngOnInit(): void {
@@ -168,6 +178,26 @@ export class AppointmentListComponent implements OnInit {
         console.log(err);
         this.toastr.error('No se encontraron citas para el estudiante', 'Sin resultados');
       }
+    });
+  }
+  
+  selectAppointment(content: any,app: Appointment){
+    this.appointmentSelected = app;
+    this.modalService.open(content); 
+  }
+
+  updateComment(){
+    const update = {comment: this.formComment.get('comment')?.value};
+    this.appointmentService.updateAppointment(this.appointmentSelected?.id, update).subscribe({
+      next: (data)=>{
+        this.formComment.reset();
+        this.appointmentSelected = new Appointment();
+        this.toastr.info('El comentario fue actualizado', 'Cita actualizada');
+        this.modalService.dismissAll('Cross click');
+        location.reload();
+      },error: (e) => {
+        this.toastr.error('Ocurrio un error', 'Error');
+      },
     });
   }
 
