@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppointmentCreationComponent } from './components/appointment-creation/appointment-creation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReportShowComponent } from './components/report-show/report-show.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ReportShowComponent } from './components/report-show/report-show.compon
     AppointmentListComponent,
     AppointmentCreationComponent,
     ReportShowComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
